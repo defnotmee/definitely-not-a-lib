@@ -11,20 +11,24 @@ my template so ill have to use Matrix for this one :(
 
 // you dont even need to call Matrix<SZ, T>, you can just
 // edit the parameters here
-template<const int SZ = 2, typename T = ll>
+template<typename T = ll, const int SZ = 2>
 struct Matrix{
 
     using arr = array<array<T,SZ>, SZ>;
 
     arr v;
 
-    // if id = 1, returns identity matrix, else returns empty matrix
-    Matrix(int id = 0){
+    // if id = 0, empty matrix, else returns identity matrix
+    Matrix(int id = 1){
         v = arr({});
 
         if(id)
         for(int i = 0; i < SZ; i++)
             v[i][i] = 1;
+    }
+
+    Matrix(arr a){
+        v = a;
     }
 
     Matrix operator*(Matrix b){
