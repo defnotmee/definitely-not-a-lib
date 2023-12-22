@@ -6,7 +6,7 @@ from https://github.com/defnotmee/definitely-not-a-lib
 #include"header.h"
 #endif
 
-template<typename T = double>
+template<typename T = ll>
 struct point{
     T x, y;
 
