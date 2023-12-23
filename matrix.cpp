@@ -19,7 +19,7 @@ struct Matrix{
     arr v;
 
     // if id = 0, empty matrix, else returns identity matrix
-    Matrix(int id = 1){
+    Matrix(int id = 0){
         v = arr({});
 
         if(id)
