@@ -22,7 +22,7 @@ typedef unsigned long long ull;
 typedef long long ll;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
-const ll INFL = (1LL<<62)-1;
+const ll INFL = 4e18;
 const int INF = (1<<30)-1;
 const double EPS = 1e-7;
 const int MOD = 998244353;
