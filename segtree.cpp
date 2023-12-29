@@ -47,7 +47,7 @@ struct SegTree{
     vector<seg> tree; // yes, this is all for the pun
     vector<lazy> lz;
 
-    ll sz, ql, qr;
+    int sz, ql, qr;
     lazy val;
 
     // Here is where you change how to merge nodes
