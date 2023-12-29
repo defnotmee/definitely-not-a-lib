@@ -22,9 +22,20 @@ typedef unsigned long long ull;
 typedef long long ll;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
-const ll INFL = 4e18;
-const int INF = (1<<30)-1;
+const ll INFL = 4e18+25;
+const int INF = 1e9+42;
 const double EPS = 1e-7;
 const int MOD = 998244353;
 const int RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
 const int MAXN = 1e6+1;
+
+int main(){
+    
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    
+    
+    return 0;
+
+}
