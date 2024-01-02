@@ -3,6 +3,9 @@ from https://github.com/defnotmee/definitely-not-a-lib
 
 Sadly I already use "matrix" for vector<vector<int>> on
 my template so ill have to use Matrix for this one :(
+
+By default it creates an empty matrix, but by passing 1
+to its constructor you can create an identity matrix.
 */
 
 #ifndef O_O
@@ -31,8 +34,8 @@ struct Matrix{
         v = a;
     }
 
-    Matrix operator*(Matrix b){
-        Matrix ret();
+    Matrix<T,SZ> operator*(Matrix<T,SZ> b){
+        Matrix<T,SZ> ret(0);
 
         for(int i = 0; i < SZ; i++){
             for(int j = 0; j < SZ; j++){
@@ -45,7 +48,7 @@ struct Matrix{
         return ret;
     }
 
-    void operator*=(Matrix b){
+    void operator*=(Matrix<T,SZ> b){
         *this = *this * b;
     }
 };
