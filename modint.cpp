@@ -12,6 +12,13 @@ At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits long l
 struct modint{
     ll x;
 
+    // It is assumed 0 <= v. Extra mod is taken for safety, 
+    // feel free to comment if you think it will inpact runtime
+    // (it won't)
+    modint(ll v = 0){ 
+        x = v%MOD;
+    }
+
     // only on C++20
     bool operator<=>(const modint&) const = default;
 
@@ -37,9 +44,5 @@ struct modint{
     
     void operator*=(modint b){
         (x*=b.x)%=MOD;
-    }
-
-    modint(ll v = 0){ // it is assumed 0 <= v < MOD
-        x = v;
     }
 };
