@@ -30,6 +30,8 @@ struct Combi{
     }
 
     modint choose(int n, int k){
+        if(n < k)
+            return 0;
         return fac[n]*invfac[k]*invfac[n-k];
     }
 } combi;
