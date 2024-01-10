@@ -26,7 +26,7 @@ The parts you'll commonly edit will be commented.
 
 struct SegTree{
     struct seg{
-        ll v = 0; // "identity value" of the operation
+        ll x = 0; // "identity value" of the operation
     };
 
     struct lazy{
@@ -52,7 +52,7 @@ struct SegTree{
 
     // Here is where you change how to merge nodes
     inline seg merge(seg a, seg b){
-        return {a.v+b.v};
+        return {a.x+b.x};
     }
 
     SegTree(int n = 0){
@@ -66,7 +66,7 @@ struct SegTree{
 
     void build(int id, int l, int r, vector<ll> & v){
         if(l == r){
-            tree[id].v = v[l];
+            tree[id].x = v[l];
             return;
         }
 
@@ -95,7 +95,7 @@ struct SegTree{
         }
 
         // Here is where you update the value of the current node based on the lazy tag
-        tree[id].v = tree[id].v*lz[id].mult+lz[id].add*(r-l+1);
+        tree[id].x = tree[id].x*lz[id].mult+lz[id].add*(r-l+1);
         lz[id] = lazy();
     }
 
