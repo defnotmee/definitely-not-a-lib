@@ -23,11 +23,11 @@ struct modint{
     bool operator<=>(const modint&) const = default;
 
     modint operator+(modint b){
-        return {(x+b.x)%MOD};
+        return {x+b.x - MOD*(x+b.x > MOD)};
     }
 
     modint operator-(modint b){
-        return {(x-b.x+MOD)%MOD};
+        return {x-b.x + MOD*(x-b.x < 0)};
     }
 
     modint operator*(modint b){
@@ -35,11 +35,13 @@ struct modint{
     };
 
     void operator+=(modint b){
-        (x+=b.x)%=MOD;
+        x+=b.x;
+        x-=MOD*(x>MOD);
     }
 
     void operator-=(modint b){
-        (x-=b.x-MOD)%=MOD;
+        x-=b.x;
+        x+=MOD*(x<0);
     }
     
     void operator*=(modint b){
