@@ -16,7 +16,7 @@ struct Vector : vector<T>{
 
     using vector<T>::vector;
 
-    Vector operator+(Vector& b){
+    Vector operator+(Vector b){
         for(int i = 0; i < this->size(); i++)
             b[i]+=(*this)[i];
         return b;
@@ -29,23 +29,23 @@ struct Vector : vector<T>{
         return ret;
     }
 
-    T operator*(Vector& b){
+    T operator*(Vector b){
         T ret = T();
         for(int i = 0; i < this->size(); i++)
             ret += (*this)[i]*b[i];
         return ret;
     }
 
-    Vector operator-(Vector& b){
+    Vector operator-(Vector b){
         b = b*-1;
         return *this+b;
     }
 
-    void operator+=(Vector& b){
+    void operator+=(Vector b){
         *this = *this+b;
     }
     
-    void operator-=(Vector& b){
+    void operator-=(Vector b){
         *this = *this-b;
     }
 
