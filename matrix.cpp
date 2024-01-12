@@ -89,4 +89,16 @@ struct Matrix{
         
         return {ret,scale};
     }
+
+    T determinant(){
+        Matrix<T> copia = *this;
+        auto [_, scale] = copia.gaussjordanize(Vector<T>(v.size()));
+
+        T resp = T(1);
+
+        for(int i = 0; i < v.size(); i++)
+            resp*=copia[i][i];
+        
+        return resp/scale;
+    }
 };
