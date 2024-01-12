@@ -21,6 +21,8 @@ struct Matrix{
         }
     }
 
+    Matrix(matrix<int> m) : v(m){};
+
     Vector<T>& operator[](int id){
         return v[id];
     }
@@ -32,6 +34,7 @@ struct Matrix{
         }
     }
 
+    // *this and b are assumed to be square matrices
     Matrix operator*(Matrix b){
         Matrix ret(v.size());
 
