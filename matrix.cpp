@@ -1,54 +1,49 @@
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
-Sadly I already use "matrix" for vector<vector<int>> on
-my template so ill have to use Matrix for this one :(
-
-By default it creates an empty matrix, but by passing 1
-to its constructor you can create an identity matrix.
+Implements linear algebra stuff for matrices.
 */
 
 #ifndef O_O
 #include"header.h"
+#include"vector2.cpp"
 #endif
 
-// you dont even need to call Matrix<SZ, T>, you can just
-// edit the parameters here
-template<typename T = ll, const int SZ = 2>
+template<typename T = ll>
 struct Matrix{
 
-    using arr = array<array<T,SZ>, SZ>;
+    Vector<Vector<T>> v;
 
-    arr v;
-
-    // if id = 0, empty matrix, else returns identity matrix
-    Matrix(int id = 0){
-        v = arr({});
-
-        if(id)
-        for(int i = 0; i < SZ; i++)
-            v[i][i] = 1;
-    }
-
-    Matrix(arr a){
-        v = a;
-    }
-
-    Matrix<T,SZ> operator*(Matrix<T,SZ> b){
-        Matrix<T,SZ> ret(0);
-
-        for(int i = 0; i < SZ; i++){
-            for(int j = 0; j < SZ; j++){
-                for(int k = 0; k < SZ; k++){
-                    ret.v[i][k]+= v[i][j]*b.v[j][k];
-                }
-            }
+    Matrix(int n = 0, int id = 0) : v(n, Vector<T>(n)) {
+        if(id){
+            for(int i = 0; i < n; i++)
+                v[i][i] = T(1);
         }
+    }
 
+    Vector<T>& operator[](int id){
+        return v[id];
+    }
+
+    void transpose(){
+        for(int i = 0; i < v.size(); i++){
+            for(int j = i+1; j < v.size(); j++)
+                swap(v[i][j],v[j][i]);
+        }
+    }
+
+    Matrix operator*(Matrix b){
+        Matrix ret(v.size());
+
+        for(int i = 0; i < v.size(); i++)
+            for(int j = 0; j < v.size(); j++)
+                for(int k = 0; k < v.size(); k++)
+                    ret[i][k] += v[i][j]*b[j][k];
+        
         return ret;
     }
 
-    void operator*=(Matrix<T,SZ> b){
-        *this = *this * b;
+    void operator*=(Matrix b){
+        *this = *this*b;
     }
 };
