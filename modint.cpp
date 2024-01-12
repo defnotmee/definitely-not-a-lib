@@ -7,6 +7,7 @@ At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits long l
 
 #ifndef O_O
 #include"header.h"
+#include"binpow.cpp"
 #endif
 
 struct modint{
@@ -16,14 +17,14 @@ struct modint{
     // feel free to comment if you think it will inpact runtime
     // (it won't)
     modint(ll v = 0){ 
-        x = v%MOD;
+        x = (v+MOD)%MOD;
     }
 
     // only on C++20
     bool operator<=>(const modint&) const = default;
 
     modint operator+(modint b){
-        return {x+b.x - MOD*(x+b.x > MOD)};
+        return {x+b.x - MOD*(x+b.x >= MOD)};
     }
 
     modint operator-(modint b){
@@ -34,9 +35,13 @@ struct modint{
         return {(x*b.x%MOD)};
     };
 
+    modint operator/(modint b){
+        return *this*power(b,MOD-2);
+    }
+
     void operator+=(modint b){
         x+=b.x;
-        x-=MOD*(x>MOD);
+        x-=MOD*(x>=MOD);
     }
 
     void operator-=(modint b){
