@@ -9,7 +9,7 @@ Implements linear algebra stuff for matrices.
 #include"vector2.cpp"
 #endif
 
-template<typename T = ll>
+template<typename T>
 struct Matrix{
 
     Vector<Vector<T>> v;
@@ -48,5 +48,45 @@ struct Matrix{
 
     void operator*=(Matrix b){
         *this = *this*b;
+    }
+
+    // second is how much the determinant is scaled by
+    pair<Vector<T>,T> gaussjordanize(Vector<T> res){
+        int n = v.size();
+
+        T scale = T(1);
+
+        for(int i = 0; i < n; i++)
+            v[i].push_back(res[i]);
+
+        int lin = 0;
+        for(int col = 0; col < n; col++){
+            int nxt = lin;
+            while(nxt < n && v[nxt][col] == 0){
+                nxt++;
+            }
+            if(nxt == n)
+                continue;
+            
+            swap(v[nxt],v[lin]);
+            if(nxt != lin)
+                scale*=-1;
+
+            for(int i = 0; i < n; i++){
+                if(i == lin)
+                    continue;
+                v[i] = v[i]*v[lin][col]-v[lin]*v[i][col];
+                scale*=v[lin][col];
+            }
+
+            lin++;
+        }
+
+        Vector<T> ret(n);
+
+        for(int i = 0; i < n; i++)
+            ret[i] = v[i].back(), v[i].pop_back();
+        
+        return {ret,scale};
     }
 };
