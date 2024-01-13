@@ -2,6 +2,8 @@
 from https://github.com/defnotmee/definitely-not-a-lib
 
 based on https://cp-algorithms.com/algebra/extended-euclid-algorithm.html
+
+Given 2 numbers x, y, returns {gcd(x,y), a, b} such that ax + by = gcd(x,y)
 */
 
 #ifndef O_O
