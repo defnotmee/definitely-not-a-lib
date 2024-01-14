@@ -55,21 +55,21 @@ constexpr T operator*(vector<T> a, vector<T> b){
 
 
 template<typename T>
-void operator+=(vector<T> a, vector<T> b){
+void operator+=(vector<T>& a, vector<T> b){
     a = a + b;
 }
 
 template<typename T>
-void operator*=(vector<T> a, T b){
+void operator*=(vector<T>& a, T b){
     a = a * b;
 }
 
 template<typename T>
-void operator/=(vector<T> a, T b){
+void operator/=(vector<T>& a, T b){
     a = a / b;
 }
 
 template<typename T>
-void operator-=(vector<T> a, vector<T> b){
+void operator-=(vector<T>& a, vector<T> b){
     a = a - b;
 }
