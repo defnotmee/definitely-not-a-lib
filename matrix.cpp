@@ -58,17 +58,34 @@ struct Matrix{
         return ret;
     }
 
+    void operator*=(Matrix b){
+        *this = *this*b;
+    }
+
+    Matrix power(ll exp){
+        Matrix in = *this;
+        Matrix ret(in.v.size(), -1, 1);
+
+        for(;exp; exp>>=1){
+            if(exp&1)
+                ret*=in;
+            in*=in;
+        }
+
+        return ret;
+    }
+
     // Linear algebra starts here:
 
     /*
     Does gaussian elimination and puts matrix in
-    upper echelon form (not reduced, since its 2x slower)
+    upper echelon form
 
     Returns determinant of the matrix square matrix induced
     by the number of lines of the matrix
     */
 
-    T gaussjordanize(){
+    T gaussjordanize(int reduced = 0){
         T det = T(1);
 
         int line = 0;
@@ -89,6 +106,11 @@ struct Matrix{
             det*=v[line][col];
             v[line]/=v[line][col];
 
+            if(reduced)
+                for(int i = 0; i < line; i++){
+                    v[i] -= v[line]*v[i][col];
+                }
+            
             for(int i = line+1; i < v.size(); i++){
                 v[i] -= v[line]*v[i][col];
             }
