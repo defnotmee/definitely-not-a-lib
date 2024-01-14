@@ -61,18 +61,14 @@ struct Matrix{
     // Linear algebra starts here:
 
     /*
-    Does gaussian elimination and takes optional
-    results array in case we are trying to solve a system of
-    linear equations.
+    Does gaussian elimination and puts matrix in
+    upper echelon form (not reduced, since its 2x slower)
 
-    Assumes to be a square matrix.
+    Returns determinant of the matrix square matrix induced
+    by the number of lines of the matrix
+    */
 
-    Returns determinant of the matrix*/
-
-    T gaussjordanize(vector<T>& results){
-        for(int i = 0; i < results.size(); i++)
-            v[i].push_back(results[i]);
-        
+    T gaussjordanize(){
         T det = T(1);
 
         int line = 0;
@@ -82,7 +78,7 @@ struct Matrix{
             while(pivot < v.size() && v[pivot][col] == T(0))
                 pivot++;
             
-            if(pivot == v.size())
+            if(pivot >= v.size())
                 continue;
             
 
@@ -93,27 +89,51 @@ struct Matrix{
             det*=v[line][col];
             v[line]/=v[line][col];
 
-            for(int i = 0; i < v.size(); i++){
-                if(i == line)
-                    continue;
-                
+            for(int i = line+1; i < v.size(); i++){
                 v[i] -= v[line]*v[i][col];
             }
 
             line++;
         }
 
-        for(int i = 0; i < results.size(); i++){
-            results[i] = v[i].back();
-            v[i].pop_back();
-        }
-
         return det * (line == v.size());
     }
 
-    T gaussjordanize(){
-        vector<T> _;
+    /*
+    Needs to be called in a square matrix that represents a system of linear
+    equations.
+    Returns {possible solution, number of solutions (2 if infinite solutions)}
+    */ 
+    pair<vector<T>,int> solve_system(vector<T> results){
+        for(int i = 0; i < results.size(); i++)
+            v[i].push_back(results[i]);
 
-        return gaussjordanize(_);
+        T det = gaussjordanize();
+
+        int ret = 1 + (det == T(0));
+
+        int n = results.size();
+        
+        for(int i = n-1; i >= 0; i--){
+            int pivot = 0;
+            while(pivot < n && v[i][pivot] == T(0))
+                pivot++;
+            
+            if(pivot == n){
+                if(v[i].back() != T(0))
+                    ret = 0;
+            } else swap(v[i], v[pivot]);
+        }
+
+        for(int i = n-1; i >= 0; i--){
+            for(int j = i+1; j < n; j++)
+                v[i].back()-=v[i][j]*v[j].back();
+        }
+
+        for(int i = 0; i < n; i++)
+            results[i] = v[i].back(), v[i].pop_back();
+
+        return {results, ret};
+
     }
 };
