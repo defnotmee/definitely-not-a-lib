@@ -52,4 +52,8 @@ struct modint{
     void operator*=(modint b){
         (x*=b.x)%=MOD;
     }
+
+    void operator/=(modint b){
+        *this = *this/b;
+    }
 };
