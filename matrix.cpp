@@ -78,8 +78,10 @@ struct Matrix{
     #ifdef vectorpp
 
     /*
+    Alters current matrix.
+
     Does gaussian elimination and puts matrix in
-    upper echelon form
+    upper echelon form (possibly reduced)
 
     Returns determinant of the matrix square matrix induced
     by the number of lines of the matrix
@@ -122,6 +124,8 @@ struct Matrix{
     }
 
     /*
+    Alters current Matrix.
+
     Needs to be called in a square matrix that represents a system of linear
     equations.
     Returns {possible solution, number of solutions (2 if infinite solutions)}
@@ -157,6 +161,27 @@ struct Matrix{
 
         return {results, ret};
 
+    }
+    
+    /*
+    Does not alter current matrix.
+    Returns {inverse matrix, is curent matrix invertable}
+    */
+    pair<Matrix<T>, bool> find_inverse(){
+        int n = v.size();
+        Matrix<T> aug = *this;
+        Matrix<T> ret(n, -1, 1);
+
+        for(int i = 0; i < n; i++)
+            aug[i].insert(aug[i].end(), all(ret[i]));
+
+        T det = aug.gaussjordanize(1);
+
+        for(int i = 0; i < n; i++){
+            ret[i] = vector<T>(n+all(aug[i]));
+        }
+
+        return {ret, det != T(0)};
     }
 
     #endif
