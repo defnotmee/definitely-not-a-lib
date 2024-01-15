@@ -3,8 +3,8 @@ from https://github.com/defnotmee/definitely-not-a-lib
 
 Implements matrices and some linear algebra stuff for them.
 
-Said linear algebra stuff uses "vector++.cpp", in case you dont need it
-you can comment the functions that error.
+Said linear algebra stuff uses "vector++.cpp", so copy it too
+if you want to use it 
 */
 
 #ifndef O_O
@@ -75,7 +75,7 @@ struct Matrix{
         return ret;
     }
 
-    // Linear algebra starts here:
+    #ifdef vectorpp
 
     /*
     Does gaussian elimination and puts matrix in
@@ -108,11 +108,11 @@ struct Matrix{
 
             if(reduced)
                 for(int i = 0; i < line; i++){
-                    v[i] -= v[line]*v[i][col];
+                    v[i] += T(-1)*v[i][col]*v[line];
                 }
             
             for(int i = line+1; i < v.size(); i++){
-                v[i] -= v[line]*v[i][col];
+                v[i] += T(-1)*v[i][col]*v[line];
             }
 
             line++;
@@ -158,4 +158,6 @@ struct Matrix{
         return {results, ret};
 
     }
+
+    #endif
 };

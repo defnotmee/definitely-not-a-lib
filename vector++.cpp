@@ -12,6 +12,7 @@ get their scalar product via operator overloads.
 #include"header.h"
 #endif
 
+#define vectorpp
 
 template<typename T>
 constexpr vector<T> operator+(vector<T> a, vector<T> b){
