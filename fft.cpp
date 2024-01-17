@@ -12,7 +12,7 @@ Based on https://cp-algorithms.com/algebra/fft.html
 
 using cd = complex<double>;
 
-void fft(vector<cd>& v){
+void fft(vector<cd>& v, bool inverse = 0){
     int n = v.size();
     int lg = log2(n);
 
@@ -37,17 +37,24 @@ void fft(vector<cd>& v){
     }
     
     for(int len = 1; len < n; len<<=1){
-        double angle = M_PI/len;
+        cd base = polar(1.0, M_PI/len);
+        
         for(int block = 0; block < n; block+=2*len){
+            cd z(1,0);
             for(int l = block; l < block+len; l++){
-                cd cur = cd{cos(angle*(l-block)), sin(angle*(l-block))}*v[l+len];
-
+                cd cur = z*v[l+len];
                 tie(v[l], v[l+len]) =
                     make_pair(v[l]+cur, v[l]-cur);
+                z*=base;
             }
         }
     }
 
+    if(inverse){
+        reverse(1+all(v));
+        for(auto& i : v)
+            i/=n;
+    }
 }
 
 
@@ -68,13 +75,12 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
     for(int i = 0; i < sz; i++)
         na[i] *= nb[i];
 
-    fft(na);
+    fft(na,1);
 
     vector<ll> ret(sz);
     for(int i = 0; i < sz; i++){
-        ret[i] = round(na[i].real()/sz);
+        ret[i] = round(na[i].real());
     }
-    reverse(1+all(ret));
 
     return ret;
 
