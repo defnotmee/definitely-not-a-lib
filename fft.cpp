@@ -3,8 +3,10 @@ from https://github.com/defnotmee/definitely-not-a-lib
 
 Thanks -is-this-fft- for your blog https://codeforces.com/blog/entry/111371
 
-Based on https://cp-algorithms.com/algebra/fft.html
-and http://neerc.ifmo.ru/trains/toulouse/2017/fft2.pdf
+References for implementation: 
+https://cp-algorithms.com/algebra/fft.html
+http://neerc.ifmo.ru/trains/toulouse/2017/fft2.pdf
+https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h
 */
 
 #ifndef O_O
@@ -93,7 +95,8 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
 
 }
 
-vector<modint> convolutionmod(vector<ll>& a, vector<ll>& b){
+template<ull M = MOD>
+vector<modint<M>> convolutionmod(vector<ll>& a, vector<ll>& b){
     
     const int len = sqrt(MOD);
     int n = 1;
@@ -116,17 +119,16 @@ vector<modint> convolutionmod(vector<ll>& a, vector<ll>& b){
         int opos = (n-i)&(n-1);
 
         // also inverting for fft inverse
-
         p1[i] = (ca[opos]+conj(ca[i]))*cb[opos]*(0.5/n);
         p2[i] = (ca[opos]-conj(ca[i]))*cb[opos]*cd(0,-0.5/n);
     }
 
     fft(p1), fft(p2);
 
-    vector<modint> ret(a.size()+b.size()-1);
+    vector<modint<M>> ret(a.size()+b.size()-1);
 
     for(int i = 0; i < ret.size(); i++){
-        modint small = round(p1[i].real()),
+        modint<M> small = round(p1[i].real()),
             mid = (ll)round(p1[i].imag()) + (ll)round(p2[i].real()),
             big = round(p2[i].imag());
 

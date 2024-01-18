@@ -2,7 +2,9 @@
 from https://github.com/defnotmee/definitely-not-a-lib
 
 Implements integers in Z_MOD. Assumes there is a global MOD variable for it to work.
-At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits long long
+At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits usigned long long
+
+If you only want to one value of MOD, check the "mint" alias at the bottom of the code.
 */
 
 #ifndef O_O
@@ -10,13 +12,17 @@ At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits long l
 #include"binpow.cpp"
 #endif
 
+// in case the modulo is not constant (given on input), use this instead
+// to instead use whatever is in the global variable MOD
+// template<ull _M>
+template<ull MOD>
 struct modint{
-    ll x;
+    ull x;
 
-    // It is assumed 0 <= v. Extra mod is taken for safety, 
-    // feel free to use the other constructor if you think it inpacts performance
-    // (it won't)
-    modint(ll v = 0) : x((v+MOD)%MOD){};
+    // It is assumed -MOD <= v. Extra mod is taken for safety.
+    // You can just call this if you're lazy instead of doing somethhing
+    // for every operator (for example, modint(x+b.x))
+    constexpr modint(ll v = 0) : x((v+MOD)%MOD){};
 
     modint(ll v, ll raw) : x(v){};
 
@@ -36,12 +42,12 @@ struct modint{
     };
 
     modint inverse(){
-        int x = this->x, y = MOD;
+        ll x = this->x, y = MOD;
 
-        complex<int> cx = {1,0}, cy = {0,1};
+        complex<ll> cx = {1,0}, cy = {0,1};
 
         while(x){
-            int curdiv = y/x;
+            ll curdiv = y/x;
             y-=curdiv*x;
             cy-=curdiv*cx;
             swap(cx, cy);
@@ -73,3 +79,5 @@ struct modint{
         *this = *this/b;
     }
 };
+
+using mint = modint<MOD>;
