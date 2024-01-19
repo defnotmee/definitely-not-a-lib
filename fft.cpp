@@ -15,15 +15,14 @@ https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical
 #endif
 
 using cdl = complex<dbll>;
-using cd = complex<double>;
+using cd = complex<double>; // change this to long double if WA and pray
 
-template<typename T>
-void fft(vector<complex<T>>& v, bool inverse = 0){
+void fft(vector<cd>& v, bool inverse = 0){
     int n = v.size();
     int lg = log2(n);
 
     static vector<cdl> loots;
-    static vector<complex<T>> roots;
+    static vector<cd> roots;
 
     loots.resize(n,1);
     roots.resize(n,1);
