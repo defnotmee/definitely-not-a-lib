@@ -6,7 +6,6 @@ I don't actually copy-paste it, I just have a snippet on VSCode.
 This is just here so that I wont get blasted with 100 million errors
 when editting this repository locally.
 */
-
 #include<bits/stdc++.h>
 #define all(x) x.begin(), x.end()
 #define ff first
@@ -22,10 +21,12 @@ typedef unsigned long long ull;
 typedef long long ll;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
+typedef double dbl;
+typedef long double dbll; 
 const ll INFL = 4e18+25;
 const int INF = 1e9+42;
 const double EPS = 1e-7;
-const int MOD = 998244353;
+const int MOD = 1e9+7;
 const int RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
 const int MAXN = 1e6+1;
 

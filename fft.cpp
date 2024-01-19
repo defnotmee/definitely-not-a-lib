@@ -14,6 +14,7 @@ https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical
 #include"modint.cpp"
 #endif
 
+using cdl = complex<dbll>;
 using cd = complex<double>;
 
 template<typename T>
@@ -21,14 +22,16 @@ void fft(vector<complex<T>>& v, bool inverse = 0){
     int n = v.size();
     int lg = log2(n);
 
-    static vector<cd> roots;
+    static vector<cdl> loots;
+    static vector<complex<T>> roots;
 
-    roots.resize(n,cd(1,0));
+    loots.resize(n,1);
+    roots.resize(n,1);
 
     for(static int len = 2; len < n; len<<=1){
-        cd z = polar(T(1), acos(T(-1))/len);
+        cdl z = polar(1.0l, acos(-1.0l)/len);
         for(int i = len; i < 2*len; i++){
-            roots[i] = roots[i/2] * ((i&1) ? z : T(1));
+            roots[i] = loots[i] = loots[i/2] * ((i&1) ? z : 1);
         }
     }
 
@@ -36,11 +39,9 @@ void fft(vector<complex<T>>& v, bool inverse = 0){
 
     for(int i = 1; i < n; i++){
         rev[i] = (rev[i>>1]>>1)+((i&1)<<lg-1);
-    }
-
-    for(int i = 1; i < n; i++)
         if(rev[i] > i)
             swap(v[i],v[rev[i]]);
+    }
     
     for(int len = 1; len < n; len<<=1){
         for(int block = 0; block < n; block+=2*len){
@@ -95,8 +96,8 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
 
 }
 
-template<ull M = MOD>
-vector<modint<M>> convolutionmod(vector<ll>& a, vector<ll>& b){
+template<ull M = MOD, typename T>
+vector<T> convolutionmod(vector<T>& a, vector<T>& b){
     
     const int len = sqrt(MOD);
     int n = 1;
@@ -125,14 +126,14 @@ vector<modint<M>> convolutionmod(vector<ll>& a, vector<ll>& b){
 
     fft(p1), fft(p2);
 
-    vector<modint<M>> ret(a.size()+b.size()-1);
+    vector<T> ret(a.size()+b.size()-1);
 
     for(int i = 0; i < ret.size(); i++){
         modint<M> small = round(p1[i].real()),
             mid = (ll)round(p1[i].imag()) + (ll)round(p2[i].real()),
             big = round(p2[i].imag());
 
-        ret[i] = small + mid*len + big*len*len;
+        ret[i] = (small + mid*len + big*len*len).x;
 
     }
 
