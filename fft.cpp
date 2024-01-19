@@ -98,7 +98,7 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
 template<ull M = MOD, typename T>
 vector<T> convolutionmod(vector<T>& a, vector<T>& b){
     
-    const int len = sqrt(MOD);
+    const int len = sqrt(M);
     int n = 1;
     while(n+1 < a.size()+b.size())
         n<<=1;
