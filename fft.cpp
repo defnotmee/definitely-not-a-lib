@@ -119,7 +119,7 @@ vector<T> convolutionmod(vector<T>& a, vector<T>& b){
         int opos = (n-i)&(n-1);
 
         // also inverting for fft inverse
-        p1[i] = (ca[opos]+conj(ca[i]))*cb[opos]*(0.5/n);
+        p1[i] = (ca[opos]+conj(ca[i]))*cb[opos]*cd(0.5/n);
         p2[i] = (ca[opos]-conj(ca[i]))*cb[opos]*cd(0,-0.5/n);
     }
 
