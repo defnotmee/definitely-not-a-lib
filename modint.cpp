@@ -13,7 +13,7 @@ If you only want to one value of MOD, check the "mint" alias at the bottom of th
 #endif
 
 // in case the modulo is not constant (given on input), use this instead
-// to instead use whatever is in the global variable MOD
+// to instead use whatever is in the global variable MOD:
 // template<ull _M>
 template<ull MOD>
 struct modint{

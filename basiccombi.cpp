@@ -17,10 +17,10 @@ https://codeforces.com/blog/entry/83075
 
 struct Combi{
     // note that inv[0] = 1 in this impl
-    vector<modint> fac, inv, invfac;
+    vector<mint> fac, inv, invfac;
 
     Combi(int n = MAXN){
-        fac = inv = invfac = vector<modint>(n,1);
+        fac = inv = invfac = vector<mint>(n,1);
 
         for(int i = 2; i < n; i++){
             fac[i] = fac[i-1]*i;
@@ -29,9 +29,10 @@ struct Combi{
         }
     }
 
-    modint choose(int n, int k){
+    mint choose(int n, int k){
         if(n < k)
             return 0;
         return fac[n]*invfac[k]*invfac[n-k];
     }
-} combi;
+};
+
