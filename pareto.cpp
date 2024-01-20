@@ -31,7 +31,7 @@ struct pareto{
             // x*=-1;
 
             // In case increasing y is bad, uncomment this:
-            y*=-1;
+            // y*=-1;
             
         }
     };
