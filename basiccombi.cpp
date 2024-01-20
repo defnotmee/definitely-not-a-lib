@@ -15,7 +15,9 @@ https://codeforces.com/blog/entry/83075
 #include"modint.cpp"
 #endif
 
+template<typename mint = mint>
 struct Combi{
+    const ull MOD = mint::MOD; // comment if non-const modulo    
     // note that inv[0] = 1 in this impl
     vector<mint> fac, inv, invfac;
 
@@ -36,3 +38,4 @@ struct Combi{
     }
 };
 
+Combi c;

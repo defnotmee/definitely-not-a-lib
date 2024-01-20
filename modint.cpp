@@ -2,39 +2,36 @@
 from https://github.com/defnotmee/definitely-not-a-lib
 
 Implements integers in Z_MOD. Assumes there is a global MOD variable for it to work.
-At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits usigned long long
+At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits unsigned long long
 
 If you only want to one value of MOD, check the "mint" alias at the bottom of the code.
 */
 
 #ifndef O_O
 #include"header.h"
-#include"binpow.cpp"
 #endif
 
-// in case the modulo is not constant (given on input), use this instead
-// to instead use whatever is in the global variable MOD:
-// template<ull _M>
-template<ull MOD>
+template<ull M> // comment if non-const MOD
 struct modint{
+    static const ull MOD = M; // comment if non-const MOD
     ull x;
 
     // It is assumed -MOD <= v. Extra mod is taken for safety.
-    // You can just call this if you're lazy instead of doing somethhing
-    // for every operator (for example, modint(x+b.x))
+    // You can just call this if you're lazy when implementing operators
+    // you can just return modint(x+b.x) for example.
     constexpr modint(ll v = 0) : x((v+MOD)%MOD){};
 
-    modint(ll v, ll raw) : x(v){};
+    constexpr modint(ll v, ll raw) : x(v){};
 
     // only on C++20
     bool operator<=>(const modint&) const = default;
 
     modint operator+(modint b){
-        return modint(x+b.x - MOD*(x+b.x >= MOD),1);
+        return modint(min(x+b.x, x+b.x-MOD),1);
     }
 
     modint operator-(modint b){
-        return modint(x-b.x + MOD*(x-b.x < 0),1);
+        return modint(min(x-b.x, x-b.x+MOD),1);
     }
 
     modint operator*(modint b){
@@ -62,13 +59,11 @@ struct modint{
     }
 
     void operator+=(modint b){
-        x+=b.x;
-        x-=MOD*(x>=MOD);
+        x = min(x+b.x, x+b.x-MOD);
     }
 
     void operator-=(modint b){
-        x-=b.x;
-        x+=MOD*(x<0);
+        x = min(x-b.x, x-b.x+MOD);
     }
     
     void operator*=(modint b){
@@ -80,4 +75,4 @@ struct modint{
     }
 };
 
-using mint = modint<MOD>;
+using mint = modint<MOD>; // comment if non const MOD
