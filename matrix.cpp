@@ -15,9 +15,10 @@ if you want to use it
 template<typename T>
 struct Matrix{
 
+    int n, m;
     matrix<T> v;
 
-    Matrix(int n, int m = -1, int id = 0){
+    Matrix(int _n, int _m = -1, int id = 0) : n(_n), m(_m) {
         if(m == -1)
             m = n;
 
@@ -36,8 +37,6 @@ struct Matrix{
     }
 
     void transpose(){
-        int n = v.size(), m = v[0].size();
-
         Matrix newv(m,n);
 
         for(int i = 0; i < n; i++)
@@ -48,11 +47,11 @@ struct Matrix{
     }
     
     Matrix operator*(Matrix b){
-        Matrix ret(v.size(), b[0].size());
+        Matrix ret(n, b.m);
 
-        for(int i = 0; i < v.size(); i++)
-            for(int j = 0; j < b.v.size(); j++)
-                for(int k = 0; k < b[0].size(); k++)
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                for(int k = 0; k < b.m; k++)
                     ret[i][k]+=v[i][j]*b[j][k];
         
         return ret;
@@ -64,7 +63,7 @@ struct Matrix{
 
     Matrix power(ll exp){
         Matrix in = *this;
-        Matrix ret(in.v.size(), -1, 1);
+        Matrix ret(n, -1, 1);
 
         for(;exp; exp>>=1){
             if(exp&1)
@@ -91,13 +90,13 @@ struct Matrix{
         T det = T(1);
 
         int line = 0;
-        for(int col = 0; col < v.size(); col++){
+        for(int col = 0; col < m; col++){
 
             int pivot = line;
-            while(pivot < v.size() && v[pivot][col] == T(0))
+            while(pivot < n && v[pivot][col] == T(0))
                 pivot++;
             
-            if(pivot >= v.size())
+            if(pivot >= n)
                 continue;
             
 
@@ -113,14 +112,14 @@ struct Matrix{
                     v[i] += T(-1)*v[i][col]*v[line];
                 }
             
-            for(int i = line+1; i < v.size(); i++){
+            for(int i = line+1; i < n; i++){
                 v[i] += T(-1)*v[i][col]*v[line];
             }
 
             line++;
         }
 
-        return det * (line == v.size());
+        return det * (line == n);
     }
 
     /*
