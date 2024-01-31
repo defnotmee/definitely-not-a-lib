@@ -1,45 +1,51 @@
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
-Implements integers in Z_MOD. Assumes there is a global MOD variable for it to work.
+Implements integers in Z_MOD.
 At all points it is assumed that 0 <= x < MOD and that MOD*MOD + MOD fits unsigned long long
 
-If you only want to one value of MOD, check the "mint" alias at the bottom of the code.
+If you want non-const MOD, use beegmod.cpp
+
+*** If you only want to one value of MOD, check the "mint" alias at the bottom of the code. ***
 */
 
 #ifndef O_O
 #include"header.h"
 #endif
 
-template<ull M> // comment if non-const MOD
+template<ull M> 
 struct modint{
-    static const ull MOD = M; // comment if non-const MOD
+    const static ull MOD = M; // in case we need to use it somewhere else (for example, combi.cpp)
+
     ull x;
 
-    // It is assumed -MOD <= v. Extra mod is taken for safety.
-    // You can just call this if you're lazy when implementing operators
-    // you can just return modint(x+b.x) for example.
-    constexpr modint(ll v = 0) : x((v+MOD)%MOD){};
+    // It is assumed -M <= v. Extra mod is taken for safety.
+    constexpr modint(ll v = 0) : x((v+M)%M){};
 
     constexpr modint(ll v, ll raw) : x(v){};
 
     // only on C++20
     bool operator<=>(const modint&) const = default;
 
+    // Example on how to implement operators if youre lazy:
+    // modint operator+(modint b){
+    //     return modint((x+b.x));
+    // }
+
     modint operator+(modint b){
-        return modint(min(x+b.x, x+b.x-MOD),1);
+        return modint(min(x+b.x, x+b.x-M),1);
     }
 
     modint operator-(modint b){
-        return modint(min(x-b.x, x-b.x+MOD),1);
+        return modint(min(x-b.x, x-b.x+M),1);
     }
 
     modint operator*(modint b){
-        return modint((x*b.x%MOD),1);
+        return modint((x*b.x%M),1);
     };
 
     modint inverse(){
-        ll x = this->x, y = MOD;
+        ll x = this->x, y = M;
 
         complex<ll> cx = {1,0}, cy = {0,1};
 
@@ -59,15 +65,15 @@ struct modint{
     }
 
     void operator+=(modint b){
-        x = min(x+b.x, x+b.x-MOD);
+        x = min(x+b.x, x+b.x-M);
     }
 
     void operator-=(modint b){
-        x = min(x-b.x, x-b.x+MOD);
+        x = min(x-b.x, x-b.x+M);
     }
     
     void operator*=(modint b){
-        (x*=b.x)%=MOD;
+        (x*=b.x)%=M;
     }
 
     void operator/=(modint b){
@@ -75,4 +81,4 @@ struct modint{
     }
 };
 
-using mint = modint<MOD>; // comment if non const MOD
+using mint = modint<MOD>;

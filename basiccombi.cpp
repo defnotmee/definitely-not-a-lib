@@ -15,9 +15,10 @@ https://codeforces.com/blog/entry/83075
 #include"modint.cpp"
 #endif
 
-template<typename mint = mint>
+template<ull M = MOD>
 struct Combi{
-    const ull MOD = mint::MOD; // comment if non-const modulo    
+    using mint = modint<M>;
+
     // note that inv[0] = 1 in this impl
     vector<mint> fac, inv, invfac;
 
@@ -26,7 +27,7 @@ struct Combi{
 
         for(int i = 2; i < n; i++){
             fac[i] = fac[i-1]*i;
-            inv[i] = (inv[MOD%i])*(MOD-(MOD/i));
+            inv[i] = inv[M%i]*(M-M/i);
             invfac[i] = invfac[i-1]*inv[i];
         }
     }
