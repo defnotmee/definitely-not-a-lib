@@ -13,12 +13,11 @@ template<typename T>
 T power(T cur, int exp){
     T resp = T(1); // works for modint.cpp and matrix.cpp by default
 
-    // edit this to 60 if you change the exp to long long
-    for(int i = 0; i < 30; i++){
-        if((exp>>i)&1)
-            resp *= cur;
+    while(exp){
+        if(exp&1)
+            resp*=cur;
         cur*=cur;
+        exp>>=1;
     }
-
     return resp;
 }
