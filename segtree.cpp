@@ -66,7 +66,7 @@ struct SegTree{
 
     void build(int id, int l, int r, vector<ll> & v){
         if(l == r){
-            tree[id].x = v[l];
+            tree[id].x = {v[l]};
             return;
         }
 
@@ -95,7 +95,7 @@ struct SegTree{
         }
 
         // Here is where you update the value of the current node based on the lazy tag
-        tree[id].x = tree[id].x*lz[id].mult+lz[id].add*(r-l+1);
+        tree[id] = {tree[id].x*lz[id].mult+lz[id].add*(r-l+1)};
         lz[id] = lazy();
     }
 
