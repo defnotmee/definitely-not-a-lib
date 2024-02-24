@@ -1,3 +1,5 @@
+
+
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
@@ -5,7 +7,7 @@ why am i doing this
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 

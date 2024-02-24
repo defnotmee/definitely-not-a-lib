@@ -3,6 +3,7 @@ by Leonardo Valente Nascimento
 
 My beautiful template :D
 I don't actually copy-paste it, I just have a snippet on VSCode.
+(see file_to_json.py)
 This is just here so that I wont get blasted with 100 million errors
 when editting this repository locally.
 */

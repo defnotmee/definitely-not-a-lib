@@ -5,7 +5,7 @@ Create a vector that can be accessed with indexes from [-n to n-1].
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 template<typename T>

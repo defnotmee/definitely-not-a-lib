@@ -10,8 +10,8 @@ https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical
 */
 
 #ifndef O_O
-#include"header.h"
-#include"modint.cpp"
+#include"template.cpp"
+#include"modint.hpp"
 #endif
 
 using cdl = complex<dbll>;

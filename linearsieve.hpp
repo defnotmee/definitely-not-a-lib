@@ -9,7 +9,7 @@ By default creates a sieve named sieve of size MAXN.
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 struct Sieve{

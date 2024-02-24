@@ -12,7 +12,7 @@ Can only do insertions. O(logn) per insert.
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 struct pareto{

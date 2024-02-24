@@ -3,7 +3,7 @@ from https://github.com/defnotmee/definitely-not-a-lib
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 template<typename T = ll>

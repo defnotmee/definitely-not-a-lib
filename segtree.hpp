@@ -21,7 +21,7 @@ The parts you'll commonly edit will be commented.
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 struct SegTree{

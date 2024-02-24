@@ -8,7 +8,7 @@ TODO: clean code, make it more general
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 const int LEN = 400;

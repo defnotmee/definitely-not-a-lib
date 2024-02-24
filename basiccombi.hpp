@@ -11,8 +11,8 @@ https://codeforces.com/blog/entry/83075
 
 
 #ifndef O_O
-#include"header.h"
-#include"modint.cpp"
+#include"template.cpp"
+#include"modint.hpp"
 #endif
 
 template<ull M = MOD>

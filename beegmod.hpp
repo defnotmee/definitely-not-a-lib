@@ -6,7 +6,7 @@ number theory stuff.
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 inline ull modadd(ull a, ull b, ull m){

@@ -9,8 +9,8 @@ https://github.com/kth-competitive-programming/kactl/blob/main/content/number-th
 */
 
 #ifndef O_O
-#include"header.h"
-#include"beegmod.cpp"
+#include"template.cpp"
+#include"beegmod.hpp"
 #endif
 
 bool is_prime(ull n){

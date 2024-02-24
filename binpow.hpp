@@ -6,7 +6,7 @@ Does binary exponentation. By default can handle exponents
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 template<typename T>

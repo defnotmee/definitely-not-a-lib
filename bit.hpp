@@ -14,7 +14,7 @@ for every i <= id, returns ret.
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 template<typename T = ll>

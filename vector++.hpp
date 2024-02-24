@@ -9,7 +9,7 @@ get their scalar product via operator overloads.
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 #define vectorpp

@@ -7,7 +7,7 @@ Given 2 numbers x, y, returns {gcd(x,y), alpha, beta} such that alpha*x + beta*y
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 auto gcd_ex(ll x, ll y){

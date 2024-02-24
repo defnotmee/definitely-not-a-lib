@@ -8,8 +8,8 @@ if you want to use it
 */
 
 #ifndef O_O
-#include"header.h"
-#include"vector++.cpp"
+#include"template.cpp"
+#include"vector++.hpp"
 #endif
 
 template<typename T>

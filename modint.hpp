@@ -10,7 +10,7 @@ If you want non-const MOD, use beegmod.cpp
 */
 
 #ifndef O_O
-#include"header.h"
+#include"template.cpp"
 #endif
 
 template<ull M> 
