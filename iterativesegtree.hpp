@@ -4,6 +4,9 @@ from https://github.com/defnotmee/definitely-not-a-lib
 Segtree that does point updates and range queries. The merge operation
 can be non-commutative. Implementation based on https://codeforces.com/blog/entry/18051
 
+Different from the implementation on that blog, the range on query is [l,r] instead of
+[l,r)
+
 Commonly changed parts will be commented
 */
 
