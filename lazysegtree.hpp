@@ -7,9 +7,8 @@ Query: makeqry(l,r), returns seg object equivalent to the sum of all values on r
 
 =============================================================================
 
-If a lazy segtree is not needed I recommend going for an iterative segtree.
+If a lazy segtree is not needed I recommend going for an iterativesegtree.hpp .
 You can erase the parts where it does lazy propagation also.
-TODO: implement said iterative segtree.
 
 Segtree for affine transformations and range sums in O(log(n)).
 Made to be as customizable and copy-pasteable as possible, speed 

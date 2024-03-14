@@ -27,7 +27,7 @@ typedef long double dbll;
 const ll INFL = 4e18+25;
 const int INF = 1e9+42;
 const double EPS = 1e-7;
-const int MOD = 1e9+7;
+const int MOD = (1<<23)*17*7 + 1; // 998244353
 const int RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
 const int MAXN = 1e6+1;
 
