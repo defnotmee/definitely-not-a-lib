@@ -14,12 +14,14 @@ Commonly changed parts will be commented
 #include"template.cpp"
 #endif
 
-// in case you want nodes to be a custom struct
+// in case you want nodes to be a custom struct:
+
+// uncomment this
 // struct seg {
 //     ll x;
 // };
 
-template<typename seg = ll>
+template<typename seg = ll> // comment this
 struct SegPoint{
 
     vector<seg> tree;
