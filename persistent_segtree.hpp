@@ -27,33 +27,31 @@ struct SegNode {
     SegNode(seg _x = 0) : x(_x){};
  
     SegNode(SegNode<seg>& b) : e(b.e), d(b.d), x(b.x){};
- 
-    void refresh(){
-        e = e ? e : make();
-        d = d ? d : make();
-    }
- 
+
     static seg merge(seg e, seg d){
         return e+d; 
     }
- 
-    sp update(ll l, ll r, ll target, seg val){
+    
+    constexpr seg get(){
+        return this ? x : seg();
+    }
+
+    void update(ll l, ll r, ll target, seg val){
         if(l == r){ 
-            return make(val);
+            x = val;
+            return;
         }
- 
-        auto ret = make(*this);
- 
-        ret->refresh();
- 
+
+        if(!e)
+            e = make(), d = make();
+
         ll m = (l+r)>>1;
  
         if(target <= m)
-            ret->e = ret->e->update(l,m,target,val);
-        else ret->d = ret->d->update(m+1,r,target,val);
- 
-        ret->x = merge(ret->e->x, ret->d->x);
-        return ret;
+            (e = make(*e))->update(l,m,target,val);
+        else (d = make(*d))->update(m+1,r,target,val);
+
+        x = merge(e->get(), d->get());
     }
  
     seg query(ll l, ll r, ll ql, ll qr){
@@ -63,8 +61,9 @@ struct SegNode {
         if(ql > r || l > qr)
             return seg();
         
-        refresh();
- 
+        if(!e)
+            e = make(), d = make();
+        
         ll m = (l+r)>>1;
         
         return merge(e->query(l,m,ql,qr),
@@ -82,7 +81,7 @@ struct PSegTree{
     PSegTree(ll _l, ll _r) : l(_l), r(_r), head(new SegNode<seg>){};
  
     void update(ll id, seg x){
-        head = head->update(l,r,id,x);
+        (head = make(*head))->update(l,r,id,x);
     }
  
     seg query(ll ql, ll qr){
