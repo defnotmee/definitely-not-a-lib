@@ -31,7 +31,8 @@ struct SegPoint{
 
     SegPoint(vector<seg> v){ // O(n) builder
         *this = SegPoint(v.size());
-        for(int i = 0; i < sz; i ++)
+        
+        for(int i = 0; i < sz; i++)
             tree[i+sz] = v[i];
         for(int i = sz-1; i > 0; i--)
             tree[i] = merge(tree[2*i], tree[2*i+1]);
@@ -42,7 +43,11 @@ struct SegPoint{
     }
     void update(int id, seg val){
         id+=sz;
+
+
         tree[id] += val; // here is where you update a point
+
+
         id>>=1;
 
         while(id){
