@@ -19,7 +19,7 @@ Commonly changed parts will be commented.
 
 // uncomment this
 // struct seg {
-//     ll x;
+//     ll x = 0; // "identity value" of operation
 // };
 
 template<typename seg = ll> // comment this
