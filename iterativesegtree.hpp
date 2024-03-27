@@ -1,20 +1,21 @@
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
-Segtree that does point updates and range queries. The merge operation
-can be non-commutative. Implementation based on https://codeforces.com/blog/entry/18051
+Segtree that does point updates and range queries (by default, point set range sum). 
+The merge operation can be non-commutative. 
 
+Implementation based on https://codeforces.com/blog/entry/18051
 Different from the implementation on that blog, the range on query is [l,r] instead of
 [l,r)
 
-Commonly changed parts will be commented
+Commonly changed parts will be commented.
 */
 
 #ifndef O_O
 #include"template.cpp"
 #endif
 
-// in case you want nodes to be a custom struct:
+// In case you want nodes to be a custom struct:
 
 // uncomment this
 // struct seg {
@@ -31,7 +32,7 @@ struct SegPoint{
 
     SegPoint(vector<seg> v){ // O(n) builder
         *this = SegPoint(v.size());
-        
+
         for(int i = 0; i < sz; i++)
             tree[i+sz] = v[i];
         for(int i = sz-1; i > 0; i--)
@@ -44,9 +45,7 @@ struct SegPoint{
     void update(int id, seg val){
         id+=sz;
 
-
-        tree[id] += val; // here is where you update a point
-
+        tree[id] = val; // here is where you update a point
 
         id>>=1;
 
