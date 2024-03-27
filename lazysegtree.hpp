@@ -2,8 +2,8 @@
 from https://github.com/defnotmee/definitely-not-a-lib
 
 Declaration: SegTree(size)
-Update: makeupd(l, r, {mult, add}), for l <= i <= r, v[i] = v[i]*mult+add
-Query: makeqry(l,r), returns seg object equivalent to the sum of all values on range [l,r]
+Update: update(l, r, {mult, add}), for l <= i <= r, v[i] = v[i]*mult+add
+Query: query(l,r), returns seg object equivalent to the sum of all values on range [l,r]
 
 =============================================================================
 
@@ -98,7 +98,7 @@ struct SegTree{
         lz[id] = lazy();
     }
 
-    void update(int id, int l, int r){
+    void upd(int id, int l, int r){
         refresh(id,l,r);
 
         if(ql <= l && r <= qr){
@@ -111,13 +111,13 @@ struct SegTree{
 
         const int e = id*2+1, d = id*2+2, m = (l+r)>>1;
 
-        update(e,l,m);
-        update(d,m+1,r);
+        upd(e,l,m);
+        upd(d,m+1,r);
 
         tree[id] = merge(tree[e], tree[d]);
     }
 
-    seg query(int id, int l, int r){
+    seg qry(int id, int l, int r){
         refresh(id,l,r);
 
         if(ql <= l && r <= qr)
@@ -127,18 +127,18 @@ struct SegTree{
             return seg();
         
         const int e = id*2+1, d = id*2+2, m = (l+r)>>1;
-        return merge(query(e,l,m), query(d,m+1,r));
+        return merge(qry(e,l,m), qry(d,m+1,r));
     }
 
-    void makeupd(int l, int r, lazy x){
+    void update(int l, int r, lazy x){
         ql = l, qr = r, val = x;
 
-        update(0,0,sz-1);
+        upd(0,0,sz-1);
     }
 
-    seg makeqry(int l, int r){
+    seg query(int l, int r){
         ql = l, qr = r;
 
-        return query(0,0,sz-1);
+        return qry(0,0,sz-1);
     }
 };
