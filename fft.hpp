@@ -24,8 +24,11 @@ void fft(vector<cd>& v, bool inverse = 0){
     static vector<cdl> loots;
     static vector<cd> roots;
 
-    loots.resize(n,1);
-    roots.resize(n,1);
+    if(loots.size() < n){
+        loots.resize(n,1);
+        roots.resize(n,1);
+    }
+    
 
     for(static int len = 2; len < n; len<<=1){
         cdl z = polar(1.0l, acos(-1.0l)/len);
@@ -95,8 +98,8 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
 
 }
 
-template<ull M = MOD, typename T>
-vector<T> convolutionmod(vector<T>& a, vector<T>& b){
+template<ull M = MOD>
+vector<modint<M>> convolutionmod(vector<modint<M>>& a, vector<modint<M>>& b){
     
     const int len = sqrt(M);
     int n = 1;
@@ -106,10 +109,10 @@ vector<T> convolutionmod(vector<T>& a, vector<T>& b){
     vector<cd> ca(n), cb(n);
 
     for(int i = 0; i < a.size(); i++)
-        ca[i] = cd(a[i]%len, a[i]/len);
+        ca[i] = cd(a[i].x%len, a[i].x/len);
     
     for(int i = 0; i < b.size(); i++)
-        cb[i] = cd(b[i]%len, b[i]/len);
+        cb[i] = cd(b[i].x%len, b[i].x/len);
 
     fft(ca), fft(cb);
 
@@ -125,14 +128,14 @@ vector<T> convolutionmod(vector<T>& a, vector<T>& b){
 
     fft(p1), fft(p2);
 
-    vector<T> ret(a.size()+b.size()-1);
+    vector<modint<M>> ret(a.size()+b.size()-1);
 
     for(int i = 0; i < ret.size(); i++){
         modint<M> small = round(p1[i].real()),
             mid = (ll)round(p1[i].imag()) + (ll)round(p2[i].real()),
             big = round(p2[i].imag());
 
-        ret[i] = (small + mid*len + big*len*len).x;
+        ret[i] = small + mid*len + big*len*len;
 
     }
 
