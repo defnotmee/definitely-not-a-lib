@@ -1,9 +1,0 @@
-/*
-from https://github.com/defnotmee/definitely-not-a-lib
-*/
-
-#ifndef O_O
-#include"template.cpp"
-#endif
-
-$0
