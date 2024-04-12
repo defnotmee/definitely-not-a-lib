@@ -1,3 +1,5 @@
+// TODO: Make build accept elements of type seg like iterativesegtree.hpp
+
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
