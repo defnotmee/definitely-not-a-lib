@@ -9,14 +9,12 @@ from https://github.com/defnotmee/definitely-not-a-lib
 template<typename T>
 vector<int> kmp(T s){
     vector<int> pi(s.size());
-    pi[0] = -1;
     for(int i = 1; i < s.size(); i++){
         pi[i] = pi[i-1];
-        while(pi[i] != -1 && s[pi[i]] != s[i]){
-            pi[i] = pi[pi[i]];
+        while(pi[i] != 0 && s[pi[i]] != s[i]){
+            pi[i] = pi[pi[i]-1];
         }
-        pi[i]++;
+        pi[i]+=s[i]==s[pi[i]];
     }
-    pi[0] = 0;
     return pi;
 }
