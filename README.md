@@ -1,7 +1,7 @@
 # definitely-not-a-lib
 
-My library for competitive programming. Most code will be written by me. 
+Every file that has a dependency has a line that includes that file.
 
-Anyone can use it if they want, but it will probably be massively incomplete for a while.
+In case you're copypasting, remember to have #define O_O
 
-By Leonardo Valente Nascimento
+:D

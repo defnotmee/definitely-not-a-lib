@@ -25,8 +25,8 @@ Commonly changed parts will be commented.
 template<typename seg = ll> // comment this
 struct SegPoint{
 
-    vector<seg> tree;
     int sz;
+    vector<seg> tree;
 
     SegPoint(int n = 0): sz(n), tree(2*n){};
 
