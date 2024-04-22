@@ -78,9 +78,10 @@ struct SCC{
         }
 
         // comment if you dont care about repeated edges
-        for(int i = 0; i < scc_count; i++)
-            sort(all(ret.g[i])), ret.g[i].erase(unique(all(ret.g[i])),ret.g[i].end());
-
+        for(int i = 0; i < scc_count; i++){
+            sort(all(ret.g[i]));
+            ret.g[i].erase(unique(all(ret.g[i])),ret.g[i].end());
+        }
         return ret;
     }
 
