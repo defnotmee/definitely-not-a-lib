@@ -100,6 +100,20 @@ struct SegTree{
         lz[id] = lazy();
     }
 
+    void update(int l, int r, lazy x){
+        ql = l, qr = r, val = x;
+
+        upd(0,0,sz-1);
+    }
+
+    seg query(int l, int r){
+        ql = l, qr = r;
+
+        return qry(0,0,sz-1);
+    }
+
+    private:
+    
     void upd(int id, int l, int r){
         refresh(id,l,r);
 
@@ -130,17 +144,5 @@ struct SegTree{
         
         const int e = id*2+1, d = id*2+2, m = (l+r)>>1;
         return merge(qry(e,l,m), qry(d,m+1,r));
-    }
-
-    void update(int l, int r, lazy x){
-        ql = l, qr = r, val = x;
-
-        upd(0,0,sz-1);
-    }
-
-    seg query(int l, int r){
-        ql = l, qr = r;
-
-        return qry(0,0,sz-1);
     }
 };
