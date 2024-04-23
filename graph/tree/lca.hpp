@@ -54,23 +54,18 @@ struct LCATree : Tree {
     }
 
     private:
+
     void prec(int id){
         tin[id] = ++timer;
         eid[id] = euler.size(); // not on rooted_tree.hpp
         euler.push_back(id); // not on rooted_tree.hpp
-
-        for(int i = 0; i < g[id].size(); i++){
-            int& viz = g[id][i];
-            if(viz == pai[id]){
-                swap(viz,g[id].back());
-                g[id].pop_back();
-                i--;
+        for(int v : g[id]){
+            if(v == pai[id])
                 continue;
-            }
-            pai[viz] = id;
-            height[viz] = height[id]+1;
-            prec(viz);
-            sub[id]+=sub[viz];
+            pai[v] = id;
+            height[v] = height[id]+1;
+            prec(v);
+            sub[id]+=sub[v];
             euler.push_back(id); // not on rooted_tree.hpp
         }
         tout[id] = timer;

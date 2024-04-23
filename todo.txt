@@ -1,17 +1,14 @@
 - Add HLD
+- Add aho corasick
+- Add suffix array
+- Add z function
 - Add and learn half plane intersection
-- Add and learn aho corasick
 - Improve lazy segtree template
 - Add sparse segtree template
-- Add suffix array template
 - Add and learn simplex
 - Add quadratic equation solver
 - Add convex hull
 - Add convex hull trick
-- Add z function
 - Add and learn li chao tree
 - Add and learn suffix automaton
-- Add and learn manacher
-
-Done:
-- Add SCC
+- Add and learn manacher    
