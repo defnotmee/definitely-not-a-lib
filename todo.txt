@@ -1,12 +1,13 @@
-- Add HLD
 - Add aho corasick
 - Add suffix array
 - Add z function
+- Add centroid decomposition
 - Add and learn half plane intersection
 - Improve lazy segtree template
 - Add sparse segtree template
 - Add and learn simplex
 - Add quadratic equation solver
+- Add big int
 - Add convex hull
 - Add convex hull trick
 - Add and learn li chao tree
