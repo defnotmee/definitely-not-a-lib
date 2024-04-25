@@ -33,8 +33,18 @@ Topics which are already implemented will have their squares filled, topics whic
         - [x] Tree Isomorphism
         - [x] Lowest Common Ancestor (LCA)
         - [ ] Centroid decomposition
+        - [ ] Link-Cut Tree
     - [x] Kosaraju's algorithm for SCC + Condensation graph
     - [ ] 2-SAT
+    - [ ] Max Flow (Dinic)
+    - [ ] Min Cost Max Flow
+    - [ ] Flow with demands
+    - [ ] Weighted Matching (Hungarian Algorithm)
+    - [ ] DFS Tree
+    - [ ] Block-Cut Tree
+    - [ ] Minimum Spanning Tree (MST)
+    - [ ] Dominator Tree
+    - [ ] Functional graph
 - [ ] Math:
     - [ ] Algebra
         - [x] FFT

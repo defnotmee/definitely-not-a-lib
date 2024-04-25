@@ -1,1 +1,3 @@
-- Fix lazy segtre template
+- Upgrade lazy segtre teemplate
+- Add HLD usage
+- Add 2SAT usage
