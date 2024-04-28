@@ -1,5 +1,9 @@
 # definitely-not-a-lib
 
+Leonardo Valente Nascimento's competitive programming library.
+Most code will be written by me (credits will be given otherwise). 
+Anyone can use this if they want, but it will probably be massively incomplete for a while. 
+
 Every file that has a dependency has a line that includes that file.
 
 In case you're copypasting, remember to have #define O_O
@@ -68,6 +72,7 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Interval Hashing
     - [x] Prefix Function (KMP)
     - [ ] Z-Function
+    - [x] Trie
     - [ ] Aho-Corasick
     - [ ] Suffix Array
     - [ ] Manacher's algorithm
