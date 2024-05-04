@@ -8,6 +8,7 @@ from https://github.com/defnotmee/definitely-not-a-lib
 
 template<int ALPHA = 26, int INI = 'a'>
 struct Trie {
+    public:
     struct node{
         array<int,ALPHA> ptr;
         int term; // number of strings that terminate on the node
@@ -20,7 +21,7 @@ struct Trie {
     };
     vector<node> trie;
 
-    Trie(int expected = 1010101) : trie(1) {
+    Trie(int expected = MAXN) : trie(1) {
         trie.reserve(expected);
     }
 
@@ -39,15 +40,15 @@ struct Trie {
         trie[id].term += ct;
     }
 
-    node find(string& s){
+    int find(string& s){
         int id = 0, pos = 0;
         while(pos < s.size()){
             char cur = s[pos]-INI;
             if(trie[id].ptr[cur] == -1)
-                return node();
+                return -1;
             id = trie[id].ptr[cur];
             pos++;
         }
-        return trie[id];
+        return id;
     }
 };
