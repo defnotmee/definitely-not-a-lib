@@ -15,9 +15,10 @@ In case you're copypasting, remember to have #define O_O
 Topics which are already implemented will have their squares filled, topics which are planned to be added will have empty squares.
 
 - [ ] Data Structures:
-    - [x] BIT (fenwick tree)
+    - [x] Cartesian Tree
     - [x] Vector with negative indices
-    - [x] Partially ordered set (pareto) 
+    - [x] Partially ordered set (pareto)
+    - [x] BIT (fenwick tree)
     - [x] Iterative Segtree
     - [x] Lazy Segtree
     - [x] Persistent Segtree
@@ -73,7 +74,7 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Prefix Function (KMP)
     - [ ] Z-Function
     - [x] Trie
-    - [ ] Aho-Corasick
+    - [x] Aho-Corasick
     - [ ] Suffix Array
     - [ ] Manacher's algorithm
     - [ ] Suffix automaton
