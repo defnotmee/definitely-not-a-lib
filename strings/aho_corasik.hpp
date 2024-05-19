@@ -13,9 +13,7 @@ struct SuperTrie : Trie<ALPHA, INI>{
     using Trie<ALPHA,INI>::trie;
     vector<bstring<int>> rslink;
 
-    SuperTrie(int expected = MAXN) : Trie<ALPHA, INI>(MAXN){
-        trie[0].term = 0;
-    }
+    SuperTrie(int expected = MAXN) : Trie<ALPHA, INI>(MAXN){}
 
     int next(int id, int c){
         while(id && trie[id].ptr[c] == -1)
