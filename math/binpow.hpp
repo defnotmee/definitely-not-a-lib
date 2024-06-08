@@ -11,7 +11,7 @@ Does binary exponentation. By default can handle exponents
 
 template<typename T>
 T power(T cur, int exp){
-    T resp = T(1); // works for modint.cpp and matrix.cpp by default
+    T resp = T(1); // works for modint.cpp by default
 
     while(exp){
         if(exp&1)
