@@ -98,6 +98,32 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
 
 }
 
+vector<cd> convolution(vector<cd> a, vector<cd> b){
+    int mx = max(a.size(),b.size());
+    int rets = a.size()+b.size()-1;
+    int n = 1;
+ 
+    while(n+1 < a.size()+b.size())
+        n<<=1;
+    
+    a.resize(n), b.resize(n);
+ 
+    fft(a), fft(b);
+ 
+    vector<cd> newin(n);
+ 
+    for(int i = 0; i < n; i++){
+        newin[i] = a[i]*b[i];
+    }
+    
+    fft(newin,1);
+ 
+    newin.resize(rets);
+ 
+    return newin;
+}
+ 
+
 template<ull M = MOD>
 vector<modint<M>> convolutionmod(vector<modint<M>>& a, vector<modint<M>>& b){
     
