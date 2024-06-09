@@ -109,18 +109,15 @@ vector<cd> convolution(vector<cd> a, vector<cd> b){
     a.resize(n), b.resize(n);
  
     fft(a), fft(b);
- 
-    vector<cd> newin(n);
- 
+  
     for(int i = 0; i < n; i++){
-        newin[i] = a[i]*b[i];
+        a[i]*=b[i];
     }
     
-    fft(newin,1);
+    fft(a,1);
+    a.resize(rets);
  
-    newin.resize(rets);
- 
-    return newin;
+    return a;
 }
  
 
