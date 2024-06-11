@@ -40,7 +40,7 @@ Topics which are already implemented will have their squares filled, topics whic
         - [ ] Centroid decomposition
         - [ ] Link-Cut Tree
     - [x] Kosaraju's algorithm for SCC + Condensation graph
-    - [ ] 2-SAT
+    - [x] 2-SAT
     - [ ] Max Flow (Dinic)
     - [ ] Min Cost Max Flow
     - [ ] Flow with demands
