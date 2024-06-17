@@ -1,9 +1,9 @@
-
-
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
-Disjoint Set Union with union by rank and path compression. O((n+m)inverse_ackermann).
+Disjoint Set Union with union by size and path compression. Complexity is O(n*inverse_ackermann(n)), where n is the number of updates.
+
+Use the "size" and "pai" functions to get the size of the group and the parent of the current vertex.
 */
 
 #ifndef O_O
@@ -12,14 +12,24 @@ Disjoint Set Union with union by rank and path compression. O((n+m)inverse_acker
 
 
 struct UnionFind{
-    vector<int> sz; // Either parent (if v[i] <= 0) or size (if v[i] > 0 and i is a root) of the component
+    private:
+    vector<int> v; // Either parent (if v[i] >= 0) or size (if v[i] < 0 and i is a root) of the component
 
-    UnionFind(int n = 0) : sz(n,1){}
+    public:
+    UnionFind(int n = 0) : v(n,-1){}
+
+    constexpr int size(int id){ // Only call when id is the root of a group. Use size(find(id)) otherwise.
+        return -v[id];
+    }
+
+    constexpr int pai(int id){ // Returns parent of id
+        return v[id] < 0 ? id : v[id];
+    }
 
     int find(int id){
-        if(sz[id] > 0)
+        if(v[id] < 0)
             return id;
-        return sz[id] = -find(-sz[id]);
+        return v[id] = find(v[id]);
     }
 
     // Returns 1 if a and b were in different groups.
@@ -31,19 +41,15 @@ struct UnionFind{
         if(a == b)
             return 0;
 
-        if(sz[a] > sz[b])
+        if(size(a) > size(b)) // union by size
             swap(a,b);
 
-        sz[b] += sz[a];
-        sz[a] = -b;
+        v[b] += v[a];
+        v[a] = b;
         return 1;
     }
 
     bool same(int a, int b){
         return find(a) == find(b);
-    }
-
-    int pai(int id){ // Returns parent of id
-        return sz[id] < 0 ? -sz[id] : id;
     }
 };
