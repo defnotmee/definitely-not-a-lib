@@ -15,7 +15,10 @@ struct DSU_Rollback{
     vector<int> v; // Either parent (if v[i] >= 0) or size (if v[i] < 0 and i is a root) of the component
     vector<log> history;
     public:
+    int comp_ct;
     
+    DSU_Rollback(int n = 0) : v(n,-1), comp_ct(n){}
+
     constexpr int size(int id){ // Only call when id is the root of a group. Use size(find(id)) otherwise.
         return -v[id];
     }
@@ -24,7 +27,6 @@ struct DSU_Rollback{
         return v[id] < 0 ? id : v[id];
     }
 
-    DSU_Rollback(int n = 0) : v(n,-1){}
 
     int find(int id){ // removing path compression
         return v[id] < 0 ? id : find(v[id]);
@@ -40,6 +42,7 @@ struct DSU_Rollback{
         if(size(a) > size(b)) // union by size
             swap(a,b);
 
+        comp_ct--;
         history.push_back({a,b,v[a],v[b]});
         v[b] += v[a];
         v[a] = b;
@@ -50,6 +53,7 @@ struct DSU_Rollback{
         auto [a,b,va,vb] = history.back();
         v[a] = va;
         v[b] = vb;
+        comp_ct++;
         history.pop_back();
     }
 
@@ -57,7 +61,7 @@ struct DSU_Rollback{
         return find(a) == find(b);
     }
 
-    int snapshot(){
+    constexpr int snapshot(){
         return history.size();
     }
     

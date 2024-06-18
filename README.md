@@ -23,7 +23,6 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Lazy Segtree
     - [x] Persistent Segtree
     - [ ] Sparse Segtree
-    - [x] Union Find (DSU) 
     - [ ] Li-chao Tree
 - [ ] Geometry:
     - [x] Basic Geometry
@@ -41,6 +40,9 @@ Topics which are already implemented will have their squares filled, topics whic
         - [ ] Link-Cut Tree
     - [x] Kosaraju's algorithm for SCC + Condensation graph
     - [x] 2-SAT
+    - [x] Union Find (DSU)
+    - [x] Union Find with Rollback 
+    - [x] Dynamic Connectivity
     - [ ] Max Flow (Dinic)
     - [ ] Min Cost Max Flow
     - [ ] Flow with demands
