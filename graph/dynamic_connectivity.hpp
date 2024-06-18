@@ -2,6 +2,7 @@
 from https://github.com/defnotmee/definitely-not-a-lib
 
 Offline Dynamic Connectivity in O(nlog²n). Allows for duplicate edges.
+If an edge that doesn't exist is deleted, it is just ignored.
 */
 
 #ifndef O_O
@@ -14,7 +15,7 @@ struct Dynamic_Connectivity{
     DSU_Rollback uf;
     vector<pii> edges;
     vector<int> ponta;
-    map<pii, vector<int>> st;
+    map<pii, basic_string<int>> st;
 
     Dynamic_Connectivity(int n = 0, int expected = 0) : n(n), uf(n){
         ponta.reserve(expected);
