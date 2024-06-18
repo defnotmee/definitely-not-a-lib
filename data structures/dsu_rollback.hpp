@@ -56,5 +56,9 @@ struct DSU_Rollback{
     bool same(int a, int b){
         return find(a) == find(b);
     }
+
+    int snapshot(){
+        return history.size();
+    }
     
 };
