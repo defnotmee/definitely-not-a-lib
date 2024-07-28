@@ -12,10 +12,11 @@ struct BinLift{
 
     struct lift{
         int to;
+        lift(int x) : to(x){}
     };
 
     // what happens when you go through a, and then go through b?
-    constexpr static lift merge(lift a, lift b){
+    static lift merge(lift a, lift b){
         return lift(b.to);
     }
 
