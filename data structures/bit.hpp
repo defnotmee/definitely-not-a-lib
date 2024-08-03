@@ -25,7 +25,7 @@ struct BIT{
         bit = vector<T>(n+1);
     }
     
-    inline void merge(T& a, T& b){
+    inline void merge(T& a, T b){
         a+=b;
     }
 
