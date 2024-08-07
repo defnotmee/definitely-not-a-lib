@@ -52,3 +52,26 @@ struct SuffixArray{
         rnk.pop_back();
     }
 };
+
+struct LCP : SuffixArray{ // untested
+
+    vector<int> lcp;
+
+    matrix<int> sparse;
+
+    LCP(string& s) : SuffixArray(s), lcp(s.size()){
+        for(int i = 0; i < s.size(); i++){
+            if(rnk[i]+1 == s.size()){
+                lcp[i] = 0;
+                continue;
+            }
+            int nxt = sa[rnk[i]+1];
+
+            while(i+lcp[i] < s.size() && nxt+lcp[i] < s.size() && s[i+lcp[i]] == s[nxt+lcp[i]])
+                lcp[i]++;
+            
+            if(i+1 < s.size())
+                lcp[i+1] = max(0,lcp[i]);
+        }
+    }
+};
