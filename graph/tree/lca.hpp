@@ -26,10 +26,7 @@ struct LCATree : Tree {
     }
 
     void calc_tree(){
-        if(m < n-1){
-            cerr << "Too little edges >:(" << endl;
-            exit(1);
-        }
+        assert(n == m-1);
         prec(root);
 
         // not on rooted_tree.hpp
