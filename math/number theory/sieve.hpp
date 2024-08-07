@@ -16,10 +16,10 @@ struct Sieve{
     vector<int> primes;
     vector<int> next;
 
-    Sieve(int n = MAXN){
-        next = vector<int>(MAXN);
+    Sieve(int n){
+        next = vector<int>(n);
 
-        for(int i = 2; i < MAXN; i++){
+        for(int i = 2; i < n; i++){
             if(!next[i])
                 next[i] = i, primes.push_back(i);
             
@@ -51,4 +51,4 @@ struct Sieve{
         }
         return ret;
     }
-} sieve;
+} sieve(MAXN);
