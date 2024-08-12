@@ -39,7 +39,6 @@ struct Tree{
         g[a].push_back(b);
         g[b].push_back(a);
         m++;
-        assert(m < n);
     }
 
     void calc_tree(){
