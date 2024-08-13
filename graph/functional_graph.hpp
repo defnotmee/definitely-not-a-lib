@@ -83,7 +83,7 @@ struct FuncGraph{
         }
     }
 
-    // returns distance from a to b, or INF if its not possible to go from a to b
+    // returns directed distance from a to b, or INF if its not possible to go from a to b
     int dist(int a, int b){
         if(cycleid[a] != cycleid[b])
             return INF;

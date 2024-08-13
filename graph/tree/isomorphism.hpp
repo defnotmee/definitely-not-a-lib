@@ -55,17 +55,18 @@ struct Rooted_Isomorphism : Tree{
     private:
 
     void prec(int id){
-        tin[id] = ++timer;
+        tout[id] = tin[id];
         for(int v : g[id]){
             if(v == pai[id])
                 continue;
             pai[v] = id;
             height[v] = height[id]+1;
+            tin[v] = tout[id]+1;
             prec(v);
+            tout[id] = tout[v];
             sub[id]+=sub[v];
             hashsub[id]+=hashsub[v]; // not on rooted_tree.hpp
         }
-        tout[id] = timer;
         hashsub[id] = hasher(hashsub[id]); // not on rooted_tree.hpp
     }
 

@@ -19,8 +19,6 @@ struct HLD : Tree {
 
     void calc_tree(){
         assert(m == n-1);
-        if(n == 1) // will RTE otherwise for n = 1
-            return;
         prec(root);
         hld(root,root);
     }
@@ -102,34 +100,40 @@ struct HLD : Tree {
     }
 
     private:
+    
     void prec(int id){
-        // tin[id] = ++timer;
-        if(g[id][0] == pai[id]) // not on rooted_tree.hpp
+        // tout[id] = tin[id];
+        if(g[id].size() && g[id][0] == pai[id]) // not on rooted_tree.hpp
             swap(g[id][0], g[id].back());// not on rooted_tree.hpp
-        for(int& v : g[id]){
+        for(int& v : g[id]){ // & not in rooted_tree.hpp
             if(v == pai[id])
                 continue;
             pai[v] = id;
             height[v] = height[id]+1;
+            // tin[v] = tout[id]+1;
             prec(v);
+            // tout[id] = tout[v];
             sub[id]+=sub[v];
             if(sub[v] > sub[g[id][0]]) // not on rooted_tree.hpp
                 swap(v,g[id][0]); // not on rooted_tree.hpp
         }
-        // tout[id] = timer;
     }
+
     void hld(int id, int hd){
-        tin[id] = ++timer;
+        tout[id] = tin[id];
         head[id] = hd;
-        if(g[id][0] != pai[id]){
+        if(g[id].size() && g[id][0] != pai[id]){
+            tin[g[id][0]] = tout[id]+1;
             hld(g[id][0],hd);
+            tout[id] = tout[g[id][0]];
         }
         for(int i = 1; i < g[id].size(); i++){
             int v = g[id][i];
             if(v == pai[id])
                 continue;
+            tin[v] = tout[id]+1;
             hld(v, v);
+            tout[id] = tout[v];
         }
-        tout[id] = timer;
     }
 };

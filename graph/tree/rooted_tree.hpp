@@ -48,36 +48,35 @@ struct Tree{
 
     // call only after calc_tree
     pii find_centroids(){
-        int v = root;
+        int id = root;
 
         while(true){
-            for(int u : g[v]){
-                if(sub[u] <= n/2){
-                    v = u;
+            for(int v : g[id]){
+                if(pai[id] != v && sub[v]*2 >= n){
+                    id = v;
                     goto NEXT;
                 }
             }
             break;
             NEXT:;
         }
-
-        if(sub[v]*2 == n)
-            return {pai[v], v};
-        return {v,v};
+        if(sub[id]*2 == n)
+            return {pai[id], id};
+        return {id,id};
     }
 
     protected:
-    int timer = -1;
     void prec(int id){
-        tin[id] = ++timer;
+        tout[id] = tin[id];
         for(int v : g[id]){
             if(v == pai[id])
                 continue;
             pai[v] = id;
             height[v] = height[id]+1;
+            tin[v] = tout[id]+1;
             prec(v);
+            tout[id] = tout[v];
             sub[id]+=sub[v];
         }
-        tout[id] = timer;
     }
 };

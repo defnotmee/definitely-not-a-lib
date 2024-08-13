@@ -26,7 +26,7 @@ struct LCATree : Tree {
     }
 
     void calc_tree(){
-        assert(n == m-1);
+        assert(m == n-1);
         prec(root);
 
         // not on rooted_tree.hpp
@@ -53,7 +53,7 @@ struct LCATree : Tree {
     private:
 
     void prec(int id){
-        tin[id] = ++timer;
+        tout[id] = tin[id];
         eid[id] = euler.size(); // not on rooted_tree.hpp
         euler.push_back(id); // not on rooted_tree.hpp
         for(int v : g[id]){
@@ -61,10 +61,11 @@ struct LCATree : Tree {
                 continue;
             pai[v] = id;
             height[v] = height[id]+1;
+            tin[v] = tout[id]+1;
             prec(v);
+            tout[id] = tout[v];
             sub[id]+=sub[v];
             euler.push_back(id); // not on rooted_tree.hpp
         }
-        tout[id] = timer;
     }
 };
