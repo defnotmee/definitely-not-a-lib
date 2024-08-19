@@ -1,8 +1,9 @@
+#!/usr/bin/env bash
+
 # Based on tyrowhiz's template.
 # Usage: bash stress.sh wrong_sol bruteforce generator test_case_count
 # Note that you won't put the extension on the arguments
 
-#!/usr/bin/env bash
 make $1
 make $2
 make $3
