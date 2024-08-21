@@ -32,15 +32,15 @@ struct modint{
     //     return modint((x+b.x));
     // }
 
-    modint operator+(modint b){
+    modint operator+(modint b) const{
         return modint(min(x+b.x, x+b.x-M),1);
     }
 
-    modint operator-(modint b){
+    modint operator-(modint b) const{
         return modint(min(x-b.x, x-b.x+M),1);
     }
 
-    modint operator*(modint b){
+    modint operator*(modint b) const {
         return modint((x*b.x%M),1);
     };
 
@@ -60,7 +60,7 @@ struct modint{
         return modint(cy.real());
     }
 
-    modint operator/(modint b){
+    modint operator/(modint b) const {
         return *this*b.inverse();
     }
 

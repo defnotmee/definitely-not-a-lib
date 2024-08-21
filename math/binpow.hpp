@@ -2,7 +2,7 @@
 from https://github.com/defnotmee/definitely-not-a-lib
 
 Does binary exponentation. By default can handle exponents
-< 2^30, for more you just edit the constants in the function.
+< 2^63, for more you just edit the constants in the function.
 */
 
 #ifndef O_O
@@ -10,14 +10,14 @@ Does binary exponentation. By default can handle exponents
 #endif
 
 template<typename T>
-T power(T cur, int exp){
-    T resp = T(1); // works for modint.cpp by default
+T power(T cur, ll exp){
+    T ret = T(1); // works for modint.cpp by default
 
     while(exp){
         if(exp&1)
-            resp*=cur;
+            ret*=cur;
         cur*=cur;
         exp>>=1;
     }
-    return resp;
+    return ret;
 }

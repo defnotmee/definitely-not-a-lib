@@ -7,7 +7,7 @@ I don't actually copy-paste it, I just have a snippet on VSCode.
 */
 
 #include<bits/stdc++.h>
-#define all(x) x.begin(), x.end()
+#define all(x) begin(x), end(x)
 #define ff first
 #define ss second
 #define O_O
