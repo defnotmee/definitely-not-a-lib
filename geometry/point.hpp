@@ -34,7 +34,7 @@ struct point{
         return x*x+y*y;
     }
 
-    inline T dist(){
+    inline double dist(){
         return sqrt(dist2());
     }
 };
