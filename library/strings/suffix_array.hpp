@@ -24,7 +24,7 @@ struct SuffixArray{
             vector<int> ct(max(256, n));
             vector<int> nsa(n);
  
-            for(int i  =0; i < n; i++){
+            for(int i = 0; i < n; i++){
                 ct[rnk[i]]++;
                 lookup[i] = {rnk[i], rnk[min(n,i+off)]};
             }

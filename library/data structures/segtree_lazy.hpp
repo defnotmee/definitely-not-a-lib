@@ -45,7 +45,7 @@ struct SegTree{
         }
     };
 
-    vector<seg> tree; // yes, this is all for the pun
+    vector<seg> tree;
     vector<lazy> lz;
 
     int sz, ql, qr;

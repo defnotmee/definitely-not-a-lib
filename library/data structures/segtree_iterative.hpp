@@ -39,7 +39,7 @@ struct SegPoint{
             tree[i] = merge(tree[2*i], tree[2*i+1]);
     }
 
-    inline seg merge(seg a, seg b){ 
+    static seg merge(seg a, seg b){ 
         return {a+b}; // here is where 2 nodes are merged
     }
     void update(int id, seg val){

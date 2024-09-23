@@ -1,6 +1,5 @@
 - Upgrade lazy segtree template
 - Add HLD usage
 - Add 2SAT usage
-- Add LCA to binary lifting
 - Add Trie usage
 - Add aho-corasick usage

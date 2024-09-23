@@ -70,7 +70,4 @@ struct SuperTrie : Trie<ALPHA, INI>{
             match[id]+=match[i];
         }
     }
-
-
-
 };

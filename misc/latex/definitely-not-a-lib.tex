@@ -8,6 +8,7 @@
 \usepackage[pdfusetitle]{hyperref}
 \usepackage[all]{xy}
 \usepackage{graphicx}
+\usepackage{xurl} % linebreak for urls
 \addtolength{\parskip}{.5\baselineskip}
 
 %aqui comeca o que eu fiz de verdade, o resto veio e eu to com medo de tirar
@@ -25,17 +26,16 @@
 breaklines=true,
 keywordstyle=\color{blue}\bfseries,
 commentstyle=\color{gray},
-breakatwhitespace=true,
+breakatwhitespace=false,
 language=C++,
-%frame=single, % nao sei se gosto disso ou nao
+% frame=single, % nao sei se gosto disso ou nao
 numbers=none,
 rulecolor=\color{black},
 showstringspaces=false
 stringstyle=\color{blue},
 tabsize=4,
 basicstyle=\ttfamily\footnotesize, % fonte
-}
-\lstset{literate=
+literate=
 %   *{0}{{{\color{red!20!violet}0}}}1
 %    {1}{{{\color{red!20!violet}1}}}1
 %    {2}{{{\color{red!20!violet}2}}}1
@@ -47,7 +47,8 @@ basicstyle=\ttfamily\footnotesize, % fonte
 %    {8}{{{\color{red!20!violet}8}}}1
 %    {9}{{{\color{red!20!violet}9}}}1
 %	 {l}{$\text{l}$}1
-	{~}{$\sim$}{1} % ~ bonitinho
+	*{~}{$\sim$}{1} % ~ bonitinho
+      % {/}{/\allowbreak}{1}  % ADDED
 }
 
 \title{Definitely Not A Lib}
@@ -524,7 +525,7 @@ ac 21 };
 
 \subsection{SegtreeIterative.hpp}
 \begin{lstlisting}
-Hash: 342a6a
+Hash: ca8ced
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
@@ -566,42 +567,42 @@ f6 bc         for(int i = sz-1; i > 0; i--)
 93 db             tree[i] = merge(tree[2*i], tree[2*i+1]);
 00 cb     }
       
-f4 d5     inline seg merge(seg a, seg b){ 
-20 df         return {a+b}; // here is where 2 nodes are merged
-cd cb     }
-9e 40     void update(int id, seg val){
-96 92         id+=sz;
+ab 2c     static seg merge(seg a, seg b){ 
+58 df         return {a+b}; // here is where 2 nodes are merged
+1a cb     }
+ea 40     void update(int id, seg val){
+c6 92         id+=sz;
       
-3b ae         tree[id] = val; // here is where you update a point
+50 ae         tree[id] = val; // here is where you update a point
       
-1d 77         id>>=1;
+b0 77         id>>=1;
       
-a5 7a         while(id){
-f8 da             tree[id] = merge(tree[2*id], tree[2*id+1]);
-20 77             id>>=1;
-e1 cb         }
-2e cb     }
+33 7a         while(id){
+89 da             tree[id] = merge(tree[2*id], tree[2*id+1]);
+e0 77             id>>=1;
+06 cb         }
+4f cb     }
       
-70 0d     seg query(int l, int r){
-1d ed         l += sz;
-93 c0         r += sz+1;
+03 0d     seg query(int l, int r){
+b4 ed         l += sz;
+81 c0         r += sz+1;
               
-2e 86         seg retl = seg(), retr = seg();
+26 86         seg retl = seg(), retr = seg();
       
-b5 40         while(l < r){
-96 1f             if(l&1)
-df 06                 retl = merge(retl, tree[l++]);
-dc 84             if(r&1)
-7d b3                 retr = merge(tree[--r], retr);
+b7 40         while(l < r){
+d4 1f             if(l&1)
+8a 06                 retl = merge(retl, tree[l++]);
+77 84             if(r&1)
+96 b3                 retr = merge(tree[--r], retr);
       
-31 45             l>>=1;
-a1 e9             r>>=1;
-16 cb         }
+2d 45             l>>=1;
+b1 e9             r>>=1;
+71 cb         }
       
-4a 5a         return merge(retl,retr);
-e0 cb     }
+8c 5a         return merge(retl,retr);
+fa cb     }
       
-34 21 };
+ca 21 };
 \end{lstlisting}
 
 \subsection{SegtreeLazy.hpp}
@@ -654,7 +655,7 @@ be 7d         ll mult = 1, add = 0; // "identity value" of lazy tag
 7d cb         }
 00 21     };
       
-cb df     vector<seg> tree; // yes, this is all for the pun
+cb df     vector<seg> tree;
 ac 2c     vector<lazy> lz;
       
 3b 40     int sz, ql, qr;
@@ -1888,9 +1889,6 @@ e3 67         for(int i : rslink[id]){
 8f b8             match[id]+=match[i];
 22 cb         }
 44 cb     }
-      
-      
-      
 20 21 };
 \end{lstlisting}
 

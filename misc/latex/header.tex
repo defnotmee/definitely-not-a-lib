@@ -8,6 +8,7 @@
 \usepackage[pdfusetitle]{hyperref}
 \usepackage[all]{xy}
 \usepackage{graphicx}
+\usepackage{xurl} % linebreak for urls
 \addtolength{\parskip}{.5\baselineskip}
 
 %aqui comeca o que eu fiz de verdade, o resto veio e eu to com medo de tirar
@@ -25,17 +26,16 @@
 breaklines=true,
 keywordstyle=\color{blue}\bfseries,
 commentstyle=\color{gray},
-breakatwhitespace=true,
+breakatwhitespace=false,
 language=C++,
-%frame=single, % nao sei se gosto disso ou nao
+% frame=single, % nao sei se gosto disso ou nao
 numbers=none,
 rulecolor=\color{black},
 showstringspaces=false
 stringstyle=\color{blue},
 tabsize=4,
 basicstyle=\ttfamily\footnotesize, % fonte
-}
-\lstset{literate=
+literate=
 %   *{0}{{{\color{red!20!violet}0}}}1
 %    {1}{{{\color{red!20!violet}1}}}1
 %    {2}{{{\color{red!20!violet}2}}}1
@@ -47,7 +47,8 @@ basicstyle=\ttfamily\footnotesize, % fonte
 %    {8}{{{\color{red!20!violet}8}}}1
 %    {9}{{{\color{red!20!violet}9}}}1
 %	 {l}{$\text{l}$}1
-	{~}{$\sim$}{1} % ~ bonitinho
+	*{~}{$\sim$}{1} % ~ bonitinho
+      % {/}{/\allowbreak}{1}  % ADDED
 }
 
 \title{Definitely Not A Lib}
