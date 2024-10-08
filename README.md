@@ -51,8 +51,7 @@ Topics which are already implemented will have their squares filled, topics whic
     - [ ] Block-Cut Tree
     - [ ] Minimum Spanning Tree (MST)
     - [ ] Dominator Tree
-    - [ ] Functional graph
-    - [ ] Euler Tour
+    - [x] Functional graph
 - [ ] Math:
     - [ ] Algebra
         - [x] FFT
