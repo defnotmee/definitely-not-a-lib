@@ -57,7 +57,6 @@ Topics which are already implemented will have their squares filled, topics whic
         - [x] FFT
         - [ ] NTT
         - [x] Matrix
-        - [x] Linear algebra vector
         - [ ] Quadratic equation
     - [ ] Number theory
         - [x] Modular arithmetic for M < 7.2e18
