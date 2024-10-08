@@ -43,7 +43,7 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Union Find (DSU)
     - [x] Union Find with Rollback 
     - [x] Dynamic Connectivity
-    - [ ] Max Flow (Dinic)
+    - [x] Max Flow (Dinic)
     - [ ] Min Cost Max Flow
     - [ ] Flow with demands
     - [ ] Weighted Matching (Hungarian Algorithm)
