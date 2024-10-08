@@ -77,7 +77,7 @@ Topics which are already implemented will have their squares filled, topics whic
     - [ ] Z-Function
     - [x] Trie
     - [x] Aho-Corasick
-    - [ ] Suffix Array
+    - [x] Suffix Array
     - [ ] Manacher's algorithm
     - [ ] Suffix automaton
 - [ ] DP:
