@@ -19,29 +19,27 @@ struct modint{
 
     ull x;
 
-    // It is assumed -M <= v. Extra mod is taken for safety.
-    constexpr modint(ll v = 0) : x((v+M)%M){};
-
-    constexpr modint(ll v, ll raw) : x(v){};
+    // It is assumed -M <= v.
+    constexpr modint(ll v = 0) : x(v >= M ? (v+M)%M : v){};
 
     // only on C++20
     bool operator<=>(const modint&) const = default;
 
     // Example on how to implement operators if youre lazy:
     // modint operator+(modint b){
-    //     return modint((x+b.x));
+    //     return x+b.x;
     // }
 
     modint operator+(modint b) const{
-        return modint(min(x+b.x, x+b.x-M),1);
+        return min(x+b.x, x+b.x-M);
     }
 
     modint operator-(modint b) const{
-        return modint(min(x-b.x, x-b.x+M),1);
+        return min(x-b.x, x-b.x+M);
     }
 
     modint operator*(modint b) const {
-        return modint((x*b.x%M),1);
+        return x*b.x%M;
     };
 
     modint inverse(){
@@ -57,7 +55,7 @@ struct modint{
             swap(x, y);
         }
 
-        return modint(cy.real());
+        return cy.real();
     }
 
     modint operator/(modint b) const {
