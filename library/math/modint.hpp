@@ -20,7 +20,7 @@ struct modint{
     ull x;
 
     // It is assumed -M <= v.
-    constexpr modint(ll v = 0) : x(v >= M ? (v+M)%M : v){};
+    constexpr modint(ll v = 0) : x(v >= M || v < 0 ? (v+M)%M : v){};
 
     // only on C++20
     bool operator<=>(const modint&) const = default;
