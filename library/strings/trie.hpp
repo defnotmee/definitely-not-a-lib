@@ -25,7 +25,7 @@ struct Trie {
         trie.reserve(expected);
     }
 
-    void insert(string& s, int ct = 1){
+    void insert(const string& s, int ct = 1){
         int id = 0;
         int pos = 0;
         while(pos < s.size()){
@@ -40,7 +40,7 @@ struct Trie {
         trie[id].term += ct;
     }
 
-    int find(string& s){
+    int find(const string& s){
         int id = 0, pos = 0;
         while(pos < s.size()){
             char cur = s[pos]-INI;

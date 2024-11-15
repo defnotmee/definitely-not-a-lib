@@ -44,12 +44,14 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Union Find with Rollback 
     - [x] Dynamic Connectivity
     - [x] Max Flow (Dinic)
+    - [x] Maximum Bipartite Matching (Hopcroft-Karp)
     - [ ] Min Cost Max Flow
     - [ ] Flow with demands
     - [ ] Weighted Matching (Hungarian Algorithm)
     - [ ] DFS Tree
     - [ ] Block-Cut Tree
     - [ ] Minimum Spanning Tree (MST)
+    - [ ] Directed MST
     - [ ] Dominator Tree
     - [x] Functional graph
 - [ ] Math:

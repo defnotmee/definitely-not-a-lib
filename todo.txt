@@ -1,3 +1,5 @@
+- Make better documentation for bipartite matching
+- Change trie template to not rely on an internal struct
 - Upgrade lazy segtree template
 - Add HLD usage
 - Add 2SAT usage

@@ -3,6 +3,9 @@ from https://github.com/defnotmee/definitely-not-a-lib
 
 Offline Dynamic Connectivity in O(nlog^2(n)). Allows for duplicate edges.
 If an edge that doesn't exist is deleted, it is just ignored.
+
+By default answers how many connected components were in the graph at
+a given point.
 */
 
 #ifndef O_O
