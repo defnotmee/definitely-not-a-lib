@@ -44,5 +44,7 @@ struct CarTree{
             if(fl[i] != -1)
                 cr[fl[i]] = i, pai[i] = fl[i];
         }
+
+        root = min_element(all(pai))-pai.begin();
     }
 };

@@ -70,3 +70,7 @@ desktop.ini
 *.swp
 *.swo
 *.sav
+
+# tex
+
+*.tex
