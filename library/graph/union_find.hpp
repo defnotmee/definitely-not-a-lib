@@ -18,11 +18,11 @@ struct UnionFind{
     public:
     UnionFind(int n = 0) : v(n,-1){}
 
-    constexpr int size(int id){ // Only call when id is the root of a group. Use size(find(id)) otherwise.
+    int size(int id){ // Only call when id is the root of a group. Use size(find(id)) otherwise.
         return -v[id];
     }
 
-    constexpr int pai(int id){ // Returns parent of id
+    int pai(int id){ // Returns parent of id
         return v[id] < 0 ? id : v[id];
     }
 
