@@ -15,7 +15,7 @@ https://codeforces.com/blog/entry/83075
 #include"modint.hpp"
 #endif
 
-template<ll M>
+template<ull M>
 struct Combi{
 
     // note that inv[0] = 1 in this impl
@@ -34,7 +34,7 @@ struct Combi{
     ll choose(int n, int k){
         if(n < k)
             return 0;
-        return fac[n]*invfac[k]*invfac[n-k];
+        return fac[n]*invfac[k]%M*invfac[n-k]%M;
     }
 };
 
