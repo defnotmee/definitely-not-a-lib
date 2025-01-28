@@ -15,7 +15,7 @@ https://codeforces.com/blog/entry/83075
 #include"modint.hpp"
 #endif
 
-ll M;
+template<ll M>
 struct Combi{
 
     // note that inv[0] = 1 in this impl
