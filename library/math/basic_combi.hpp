@@ -15,24 +15,23 @@ https://codeforces.com/blog/entry/83075
 #include"modint.hpp"
 #endif
 
-template<ull M = MOD>
+ll M;
 struct Combi{
-    using mint = modint<M>;
 
     // note that inv[0] = 1 in this impl
-    vector<mint> fac, inv, invfac;
+    vector<ll> fac, inv, invfac;
 
     Combi(int n = MAXN){
-        fac = inv = invfac = vector<mint>(n,1);
+        fac = inv = invfac = vector<ll>(n,1);
 
         for(int i = 2; i < n; i++){
-            fac[i] = fac[i-1]*i;
-            inv[i] = inv[M%i]*(M-M/i);
-            invfac[i] = invfac[i-1]*inv[i];
+            fac[i] = fac[i-1]*i%M;
+            inv[i] = inv[M%i]*(M-M/i)%M;
+            invfac[i] = invfac[i-1]*inv[i]%M;
         }
     }
 
-    mint choose(int n, int k){
+    ll choose(int n, int k){
         if(n < k)
             return 0;
         return fac[n]*invfac[k]*invfac[n-k];

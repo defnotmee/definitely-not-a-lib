@@ -11,7 +11,6 @@ https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical
 
 #ifndef O_O
 #include"../../utility/template.cpp"
-#include"../modint.hpp"
 #endif
 
 using cdl = complex<dbll>;
@@ -122,7 +121,7 @@ vector<cd> convolution(vector<cd> a, vector<cd> b){
  
 
 template<ull M = MOD>
-vector<modint<M>> convolutionmod(vector<modint<M>>& a, vector<modint<M>>& b){
+vector<ll> convolutionmod(vector<ll>& a, vector<ll>& b){
     
     const int len = sqrt(M);
     int n = 1;
@@ -132,10 +131,10 @@ vector<modint<M>> convolutionmod(vector<modint<M>>& a, vector<modint<M>>& b){
     vector<cd> ca(n), cb(n);
 
     for(int i = 0; i < a.size(); i++)
-        ca[i] = cd(a[i].x%len, a[i].x/len);
+        ca[i] = cd(a[i]%len, a[i]/len);
     
     for(int i = 0; i < b.size(); i++)
-        cb[i] = cd(b[i].x%len, b[i].x/len);
+        cb[i] = cd(b[i]%len, b[i]/len);
 
     fft(ca), fft(cb);
 
@@ -151,15 +150,14 @@ vector<modint<M>> convolutionmod(vector<modint<M>>& a, vector<modint<M>>& b){
 
     fft(p1), fft(p2);
 
-    vector<modint<M>> ret(a.size()+b.size()-1);
+    vector<ll> ret(a.size()+b.size()-1);
 
     for(int i = 0; i < ret.size(); i++){
-        modint<M> small = round(p1[i].real()),
-            mid = (ll)round(p1[i].imag()) + (ll)round(p2[i].real()),
-            big = round(p2[i].imag());
+        ll r1 = round(p1[i].real()), i1 = round(p1[i].imag());
+        ll r2 = round(p2[i].real()), i2 = round(p2[i].imag());
 
-        ret[i] = small + mid*len + big*len*len;
-
+        ll small = r1%MOD, mid = (i1+r2)%MOD, big = i2%MOD;
+        (ret[i] = small + mid*len + big*len%MOD*len)%=MOD;
     }
 
     return ret;
