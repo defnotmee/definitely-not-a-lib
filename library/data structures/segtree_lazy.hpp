@@ -1,40 +1,36 @@
-// TODO: Make build accept elements of type seg like iterativesegtree.hpp
-
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
-Declaration: SegTree(size)
-Update: update(l, r, {mult, add}), for l <= i <= r, v[i] = v[i]*mult+add
-Query: query(l,r), returns seg object equivalent to the sum of all values on range [l,r]
+Segment tree that allows range updates and queries. By default, it supports affine transformation
+updates and sum queries, but commonly editted parts will be commented.
 
-=============================================================================
-
-If a lazy segtree is not needed I recommend going for an iterativesegtree.hpp .
-You can erase the parts where it does lazy propagation also.
-
-Segtree for affine transformations and range sums in O(log(n)).
-Made to be as customizable and copy-pasteable as possible, speed 
-and code size is not a concern. 
+If a lazy segtree is not needed I recommend going for an segtree_iterative.hpp for
+speed.
 
 0-indexed by default.
 
-The parts you'll commonly edit will be commented.
+=============================================================================
+
+Declaration: SegTree<type>(size), where type is the datatype that represents a node of the segtree
+Update: update(l, r, {mult, add}), for l <= i <= r, v[i] = v[i]*mult+add
+Query: query(l,r), returns seg object equivalent to the sum of all values on range [l,r]
+
 */
 
 #ifndef O_O
 #include"../utility/template.cpp"
 #endif
 
+// Uncomment if you need a custom struct
+// struct seg{
+//     int x = 0; // identity value of the merge operation
+// }
+
+template<typename seg = ll>
 struct SegTree{
-    struct seg{
-        ll x = 0; // "identity value" of the operation
-    };
 
     struct lazy{
         ll mult = 1, add = 0; // "identity value" of lazy tag
-
-        // only for C++20, get fucked (implement your own ==) otherwise
-        auto operator<=>(const lazy& a) const = default;
 
         // Here is where you edit how to propagate the lazy tag for the children
         // of a segtree node
@@ -44,6 +40,12 @@ struct SegTree{
             add+=a.add;
         }
     };
+    static inline seg null = seg(); // identity element through the merge operation
+
+    // Here is where you change how to merge nodes
+    static seg merge(seg a, seg b){
+        return a+b;
+    }
 
     vector<seg> tree;
     vector<lazy> lz;
@@ -51,23 +53,15 @@ struct SegTree{
     int sz, ql, qr;
     lazy val;
 
-    // Here is where you change how to merge nodes
-    inline seg merge(seg a, seg b){
-        return {a.x+b.x};
-    }
-
     SegTree(int n = 0){
         sz = n;
-        tree = vector<seg>(4*n);
+        tree = vector<seg>(4*n,null);
         lz = vector<lazy>(4*n);
     }
     
-    
-    // Comment the next two functions if you dont need a O(n) builder
-
-    void build(int id, int l, int r, vector<ll> & v){
+    void build(int id, int l, int r, vector<seg> & v){
         if(l == r){
-            tree[id].x = {v[l]};
+            tree[id] = v[l];
             return;
         }
 
@@ -79,15 +73,12 @@ struct SegTree{
 
     }
 
-    SegTree(vector<ll> v){
+    SegTree(vector<seg> v){ // O(n) builder
         *this = SegTree(v.size());
         build(0,0,sz-1,v);
     }
 
     void refresh(int id, int l, int r){
-        if(lz[id] == lazy())
-            return;
-        
         if(l != r){
             const int e = id*2+1, d = id*2+2, m = (l+r)>>1;
 
@@ -96,19 +87,17 @@ struct SegTree{
         }
 
         // Here is where you update the value of the current node based on the lazy tag
-        tree[id] = {tree[id].x*lz[id].mult+lz[id].add*(r-l+1)};
+        tree[id] = tree[id]*lz[id].mult+lz[id].add*(r-l+1);
         lz[id] = lazy();
     }
 
     void update(int l, int r, lazy x){
         ql = l, qr = r, val = x;
-
         upd(0,0,sz-1);
     }
 
     seg query(int l, int r){
         ql = l, qr = r;
-
         return qry(0,0,sz-1);
     }
 
@@ -140,7 +129,7 @@ struct SegTree{
             return tree[id];
         
         if(ql > r || l > qr)
-            return seg();
+            return null;
         
         const int e = id*2+1, d = id*2+2, m = (l+r)>>1;
         return merge(qry(e,l,m), qry(d,m+1,r));

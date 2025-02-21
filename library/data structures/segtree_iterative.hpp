@@ -59,7 +59,7 @@ struct SegPoint{
         l += sz;
         r += sz+1;
         
-        seg retl = seg(), retr = seg();
+        seg retl = seg(), retr = seg(); // must be identity value through merge
 
         while(l < r){
             if(l&1)

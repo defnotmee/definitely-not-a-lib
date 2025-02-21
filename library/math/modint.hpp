@@ -15,8 +15,6 @@ If you want non-const MOD, use beegmod.cpp
 
 template<ull M> 
 struct modint{
-    const static ull MOD = M; // in case we need to use it somewhere else (for example, combi.cpp)
-
     ull x;
 
     // It is assumed -M <= v.
