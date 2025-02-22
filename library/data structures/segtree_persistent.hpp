@@ -14,13 +14,16 @@ You can effectively copy a segtree in O(1) by just copying a PSegTree instance.
 
 // Bump allocator for extra performance:
 
-// static char buf[MAXN];
+// static char buf[450 << 20]; // by default can store 4.7e8 bytes
 // void* operator new(size_t s) {
 // 	static size_t i = sizeof buf;
 // 	assert(s < i);
 // 	return (void*)&buf[i -= s];
 // }
 // void operator delete(void*) {}
+
+// implementation above from https://github.com/kth-competitive-programming/kactl/blob/main/content/various/BumpAllocator.h
+
 
 // Uncomment if you need a custom struct.
 // struct seg{
