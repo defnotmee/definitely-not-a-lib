@@ -27,6 +27,7 @@ const double EPS = 1e-7;
 const int MOD = (1<<23)*17*7 + 1; // 998244353
 const int RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
 const int MAXN = 1e6+1;
+mt19937 rng(RANDOM);
 
 int main(){
     

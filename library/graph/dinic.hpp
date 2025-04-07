@@ -58,17 +58,21 @@ struct FlowGraph{
         return ret;
     }
 
+    bool left_of_mincut(int v){
+        return dist[v] != n;
+    }
+
     private:
     vector<int> ptr, dist;
     ll block_flow(){
         ll ret = 0;
-        dist = bfs();
+        bfs();
         ptr = vector<int>(n);
         return dfs(s,INFL); // INFL needs to be >= than the max flow of the graph
     }
 
     vector<int> bfs(){
-        vector<int> dist(n,n);
+        dist = vector<int>(n,n);
 
         queue<int> q;
         dist[s] = 0;
