@@ -1,127 +1,86 @@
-/*
-from https://github.com/defnotmee/definitely-not-a-lib
-
-Uses Dinic's algorithm to calculate the maximum flow between
-s and t in a graph.
-
-O(V^2E) in general, O(Esqrt(V)) on unit networks (edges that are
-not connected to s or t have unit capacity, like in matching).
-
-Usage: Declare FlowGraph(n,s,t) and add edges to it. When done, call
-max_flow(). It returns the maximum flow between s and t. By default,
-s = 0 and t = n-1.
-
-After calling max_flow, the edges with EVEN indices on FlowGraph::edges
-will have the "flow" variable corresponding to the ammount of flow passing
-through them in the answer dinic provides.
-*/
+/**
+ * from https://github.com/defnotmee/definitely-not-a-lib
+ * Based on https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/Dinic.h
+ * 
+ * Uses Dinic's algorithm to find maximum flow between two vertices.
+ * 
+ * O(VElog(U)), where U is max capacity. Faster in practice. On unit networks
+ * (graphs where capacities not connected to source or sink are 1), complexity
+ * improves to O(sqrt(V)E).
+ * 
+ * After calling max_flow, the corresponding flow on edges is recoverable
+ * with Edge::flow() and left_of_mincut becomes well defined.
+ */
 
 #ifndef O_O
 #include"../utility/template.cpp"
 #endif
 
-struct FlowEdge {
-    ll u, v, cap, flow = 0;
 
-    ll to(ll id){
-        return id == u ? v : u;
-    }
-};
-
-struct FlowGraph{
-    int n;
-    int s, t;
-    vector<FlowEdge> edges;
-
-    vector<bstring<int>> g;
-
-    FlowGraph(int n = 0, int _s = 0, int _t = -1) : n(n), s(_s), t(_t), g(n){
-        if(t == -1)
-            t = n-1;
-    }
-
-    void add_edge(ll u, ll v, ll cap){
-        g[u].push_back(edges.size());
-        edges.push_back({u,v,cap});
-        g[v].push_back(edges.size());
-        edges.push_back({v,u,0});
-    }
-
-    ll max_flow(){
-        ll ret = 0;
-        while(true){
-            ll cur = block_flow();
-            if(!cur)
-                break;
-            ret+=cur;
+struct Dinic{
+    struct Edge{
+        ll to, cap, ocap, rev;
+        ll flow(){
+            return max(ocap-cap, 0ll);
         }
-        return ret;
+    };
+
+    vector<vector<Edge>> g;
+
+    void add_edge(int u, int v, ll cap){
+        g[u].push_back({v,cap,cap,(ll)g[v].size()});
+        g[v].push_back({u, 0, 0, (ll)g[u].size()-1});
     }
 
+    // Returns if v is in the same side of the min_cut as s
     bool left_of_mincut(int v){
-        return dist[v] != n;
+        return dist[v] != -1;
     }
+
+    ll max_flow(int s, int t){
+        ll flow = 0;
+        for(int k = 30; k >= 0; k--)
+            while(bfs(s,t,k)) while (ll it = dfs(s,t,LLONG_MAX)) flow += it;
+        return flow;
+    }
+
+    Dinic(int n) : g(n), ptr(n), dist(n){}
 
     private:
     vector<int> ptr, dist;
-    ll block_flow(){
-        ll ret = 0;
-        bfs();
-        ptr = vector<int>(n);
-        return dfs(s,INFL); // INFL needs to be >= than the max flow of the graph
-    }
 
-    vector<int> bfs(){
-        dist = vector<int>(n,n);
+    ll dfs(int id, int t, ll x){
+        if(id == t || !x)
+            return x;
 
-        queue<int> q;
-        dist[s] = 0;
-        q.push(s);
-
-        while(!q.empty()){
-            int cur = q.front();
-            q.pop();
-            for(int eid : g[cur]){
-                FlowEdge cedge = edges[eid];
-                int to = cedge.to(cur);
-
-                if(cedge.cap == cedge.flow)
-                    continue;
-                
-                if(dist[to] > dist[cur]+1){
-                    dist[to] = dist[cur]+1;
-                    q.push(to);
-                }
+        for(int & i =ptr[id]; i < g[id].size(); i++){
+            Edge& e = g[id][i];
+            if(dist[e.to] != dist[id]+1)
+                continue;
+            if(ll filled = dfs(e.to, t, min(x, e.cap))){
+                e.cap-=filled;
+                g[e.to][e.rev].cap+=filled;
+                return filled;
             }
         }
 
-        return dist;
+        return 0;
     }
 
-    ll dfs(int id, ll pushed){
-        if(pushed == 0)
-            return 0;
-        if(id == t)
-            return pushed;
-
-        ll rem = pushed;
-
-        while(rem && ptr[id] < g[id].size()){
-            int eid = g[id][ptr[id]];
-            int to = edges[eid].to(id);
-            ptr[id]++;
-
-            if(dist[id] >= dist[to])
-                continue;
-
-            ll usable = min(rem, edges[eid].cap-edges[eid].flow);
-            ll used = dfs(to,usable);
-
-            edges[eid].flow+=used;
-            edges[eid^1].flow-=used;
-
-            rem-=used;
+    bool bfs(int s, int t, int k){
+        fill(all(ptr),0), fill(all(dist),-1);
+        vector<int> q({s});
+        q.reserve(g.size());
+        dist[s] = 0;
+        for(int i = 0; i < q.size(); i++){
+            int id = q[i]; 
+            for(auto i : g[id]){
+                if(dist[i.to] == -1 && (i.cap>>k)){
+                    dist[i.to] = dist[id]+1;
+                    q.push_back(i.to);
+                }
+            }
         }
-        return pushed-rem;
-    }
+        return dist[t]+1;
+    }    
 };
