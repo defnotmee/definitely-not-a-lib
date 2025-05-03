@@ -11,25 +11,22 @@ Use the "size" and "pai" functions to get the size of the group and the parent o
 #endif
 
 
-struct UnionFind{
-    private:
+class UnionFind{
     vector<int> v; // Either parent (if v[i] >= 0) or size (if v[i] < 0 and i is a root) of the component
 
     public:
     UnionFind(int n = 0) : v(n,-1){}
 
-    int size(int id){ // Only call when id is the root of a group. Use size(find(id)) otherwise.
-        return -v[id];
+    int find(int id){
+        return v[id] < 0 ? id : find(v[id]);
+    }
+
+    int size(int id){ // Returns size of the component id belongs to
+        return -v[find(id)];
     }
 
     int pai(int id){ // Returns parent of id
         return v[id] < 0 ? id : v[id];
-    }
-
-    int find(int id){
-        if(v[id] < 0)
-            return id;
-        return v[id] = find(v[id]);
     }
 
     // Returns 1 if a and b were in different groups.
