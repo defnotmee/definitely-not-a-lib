@@ -20,8 +20,9 @@ struct modint{
     // It is assumed -M <= v.
     constexpr modint(ll v = 0) : x(v >= M ? (v+M)%M : v){};
 
-    // only on C++20
-    bool operator<=>(const modint&) const = default;
+    bool operator==(const modint& o){
+        return x == o.x;
+    }
 
     // Example on how to implement operators if youre lazy:
     // modint operator+(modint b){
