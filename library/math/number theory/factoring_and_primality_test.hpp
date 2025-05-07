@@ -10,7 +10,7 @@ https://github.com/kth-competitive-programming/kactl/blob/main/content/number-th
 
 #ifndef O_O
 #include"../../utility/template.cpp"
-#include"beegmod.hpp"
+#include"bigmod.hpp"
 #endif
 
 bool is_prime(ull n){

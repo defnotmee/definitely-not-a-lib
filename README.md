@@ -18,12 +18,16 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Cartesian Tree
     - [x] Vector with negative indices
     - [x] Partially ordered set (pareto)
+    - [x] Indexed Set (aka Ordered Set)
     - [x] BIT (fenwick tree)
-    - [x] Iterative Segtree
-    - [x] Lazy Segtree
-    - [x] Persistent Segtree
-    - [ ] Sparse Segtree
+    - [x] Sparse Table
+    - [x] Iterative Segment Tree
+    - [x] Lazy Segment Tree
+    - [x] Persistent Segment Tree
+    - [x] Dynamic Convex Hull Trick (CHT)
+    - [x] SQRT decomposition
     - [ ] Li-chao Tree
+    - [ ] Sparse Segment Tree
 - [ ] Geometry:
     - [x] Basic Geometry
     - [ ] Convex hull
@@ -36,30 +40,31 @@ Topics which are already implemented will have their squares filled, topics whic
         - [x] Heavy-Light Decomposition (HLD)
         - [x] Tree Isomorphism
         - [x] Lowest Common Ancestor (LCA)
+        - [x] Link-Cut Tree
         - [ ] Centroid decomposition
-        - [ ] Link-Cut Tree
-    - [x] Kosaraju's algorithm for SCC + Condensation graph
+    - [x] Strongly Connected Components (Kosaraju + Condensation graph)
     - [x] 2-SAT
     - [x] Union Find (DSU)
     - [x] Union Find with Rollback 
     - [x] Dynamic Connectivity
-    - [x] Max Flow (Dinic)
+    - [x] Max Flow (Dinic with Scaling)
     - [x] Maximum Bipartite Matching (Hopcroft-Karp)
-    - [ ] Min Cost Max Flow
+    - [x] Functional graph
     - [ ] Flow with demands
+    - [ ] Min Cost Max Flow
     - [ ] Weighted Matching (Hungarian Algorithm)
-    - [ ] DFS Tree
     - [ ] Block-Cut Tree
     - [ ] Minimum Spanning Tree (MST)
     - [ ] Directed MST
     - [ ] Dominator Tree
-    - [x] Functional graph
 - [ ] Math:
     - [ ] Algebra
         - [x] FFT
-        - [ ] NTT
+        - [x] Berlekam Massey
+        - [x] Linear recurrence
+        - [x] Polynomial
         - [x] Matrix
-        - [ ] Quadratic equation
+        - [ ] NTT
     - [ ] Number theory
         - [x] Modular arithmetic for M < 7.2e18
         - [x] Extended GCD
@@ -67,21 +72,23 @@ Topics which are already implemented will have their squares filled, topics whic
         - [x] Sieve of Eratosthenes (linear time)
         - [ ] Chinese Remainder Theorem (CRT)
         - [ ] Mod SQRT
-    - [x] Modular int
+    - [x] Modular integer
     - [x] Binary Exponentiation
     - [x] Basic Combinatorics (factorial, binomial)
+    - [x] Integer division
+    - [x] Matrix Multiplication
     - [ ] Big Int
 - [ ] String:
     - [x] Interval Hashing
     - [x] Prefix Function (KMP)
-    - [ ] Z-Function
     - [x] Trie
     - [x] Aho-Corasick
     - [x] Suffix Array
+    - [x] Minimum Rotation
+    - [ ] Z-Function
     - [ ] Manacher's algorithm
     - [ ] Suffix automaton
 - [ ] DP:
     - [ ] Slope Trick
     - [ ] D&C DP
-    - [ ] Convex Hull Trick
     - [ ] Knuth

@@ -8,6 +8,8 @@
  * 
  * Usage: declare CHT<1> if you want to find maximum f(x) queries, and
  * CHT<-1> if you want minimum f(x) queries.
+ * 
+ * O(log(n)) amortized insertion and O(log(n)) queries
  */
 #ifndef O_O
 #include"../utility/template.cpp"
