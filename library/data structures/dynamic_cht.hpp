@@ -1,12 +1,13 @@
 /**
  * from https://github.com/defnotmee/definitely-not-a-lib
  * 
+ * based on https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/LineContainer.h
+ * 
  * Implements a data structure where you can insert functions of the form
  * f(x) = ax+b and query the maxmimum/minimum value of f(x)
  * 
  * Usage: declare CHT<1> if you want to find maximum f(x) queries, and
  * CHT<-1> if you want minimum f(x) queries.
- * 
  */
 #ifndef O_O
 #include"../utility/template.cpp"
@@ -19,10 +20,10 @@ template<ll mult = 1>
 struct CHT{
     struct poss{
         line l;
-        mutable ll minx;
+        mutable ll maxx;
         
         bool operator<(ll x) const {
-            return minx < x;
+            return maxx < x;
         }
         bool operator<(poss o) const {
             return l < o.l;
@@ -33,9 +34,9 @@ struct CHT{
     const ll inf = LLONG_MAX;
 
     // if x can be double, change this to a/b
-    ll div_ceil(ll a, ll b){
-        return a/b+(a%b!=0 && (a^b)>0);
-    }    
+    ll div_floor(ll a, ll b){
+        return a/b-(a%b!=0 && (a^b)<0);
+    }
 
     multiset<poss,less<>> s;
     // assuming l1 <= l2, finds smallest x such that l1(x) <= l2(x)
@@ -43,33 +44,37 @@ struct CHT{
         ll da = l2[0]-l1[0], db = l1[1]-l2[1];
         if(da == 0)
             return -inf;
-        // cerr << div_ceil(db,da) << '\n';
-        return div_ceil(db,da);
+        return div_floor(db,da);
     }
 
     // Inserts f(x) = ax*b in the structure
     void insert(ll a, ll b){
         line l = {a*mult,b*mult};
+        
         auto it = s.lower_bound({l,0});
-        ll nxtin = it == s.end() ? inf : intersect(l,it->l);
-        if(nxtin < it->minx)
-            return;
-        it->minx = nxtin;
-        it = s.insert({l,-inf});
-        while(it != s.begin()){
+        while(it != s.end() && intersect(l,it->l) >= it->maxx)
+            it = s.erase(it);
+        it = s.insert({l,it == s.end() ? inf : intersect(l,it->l)});
+
+        if(it!=s.begin()){
             auto prv = prev(it);
             ll in = intersect(prv->l, l);
-            if(prv->minx < in){
-                it->minx = in;
-                break;
+            if(in > it->maxx){
+                s.erase(it);
+                return;
             }
-            s.erase(prv);
+            prv->maxx = in;
+            while(prv != s.begin() && prev(prv)->maxx >= prv->maxx){
+                s.erase(prv);
+                prv = prev(it);
+                prv->maxx = intersect(prv->l,l);
+            }
         }
     }
 
     // Finds maximum f(x) in the structure if mult = 1 and minimum f(x) if mult = -1
     ll query(ll x){
-        auto [a,b] = prev(s.lower_bound(x+1))->l;
+        auto [a,b] = s.lower_bound(x)->l;
         return mult*(a*x+b);
     }
 };
