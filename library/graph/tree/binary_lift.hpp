@@ -1,14 +1,14 @@
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
 
-Given an array of ancestors (next), is able to get information
+Given an array of ancestors (par), is able to get information
 about starting on a certain node and going to the ancestor of the
 current node k steps in a row in O(log(k)) per query. Is able to work with
 any functional graph, but the lca function just works for trees.
 
 Usage: 
 
-- BinLift(next): constructs the structure. next is assumed to be 0-indexed
+- BinLift(par): constructs the structure. par is assumed to be 0-indexed
 - lift: an auxiliary class that stores information about the path (for example
 what is the maximum edge on the path). By default only stores the vertex you will end
 up in after going up a certain number of times.
@@ -24,34 +24,27 @@ information about the path, it needs to be commutative (for example, you can sto
 #include"../../utility/template.cpp"
 #endif
 
+struct lift{
+    int to = 0;
+    int mn = INF; // Example of path agregate, must be identity value through merge
+};
+
 struct BinLift{
     
     int n, lg;
 
-    struct lift{
-        int to = 0;
-    };
-
     // what happens when you go through a, and then go through b?
     static lift merge(lift a, lift b){
-        return {b.to};
+        return {b.to, min(a.mn, b.mn)};
     }
 
     matrix<lift> jmp;
 
-    BinLift(vector<int> next) : n(next.size()), lg(1){
-
-        for(int tmp = 1; tmp < n; tmp*=2, lg++);
-
-        jmp = matrix<lift>(lg,vector<lift>(next.size()));
-        
-        // initialize jmp[0][i]
-        for(int i = 0; i < next.size(); i++)
-            jmp[0][i] = {next[i]};
-
+    BinLift(vector<lift> par) : n(par.size()), lg(log2(n)+1){
+        jmp = matrix<lift>(lg,par);
 
         for(int i = 1; i < lg; i++){
-            for(int j = 0; j < next.size(); j++){
+            for(int j = 0; j < par.size(); j++){
                 jmp[i][j] = merge(jmp[i-1][j], jmp[i-1][jmp[i-1][j].to]);
             }
         }
