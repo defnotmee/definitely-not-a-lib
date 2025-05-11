@@ -23,6 +23,7 @@ struct Poly{
 
         for(int i = 0; i < ret.n; i++)
             ret[i] = p[i]+b[i];
+        return ret;
     }
 
     Poly operator-(Poly b) const {
@@ -30,6 +31,7 @@ struct Poly{
 
         for(int i = 0; i < ret.n; i++)
             ret[i] = p[i]-b[i];
+        return ret;
     }
 
     Poly operator*(Poly b) const {

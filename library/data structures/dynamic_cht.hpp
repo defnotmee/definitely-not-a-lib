@@ -33,7 +33,7 @@ struct CHT{
     };
 
     // if x can be double, change this to -INFINITY
-    const ll inf = LLONG_MAX;
+    static const ll inf = LLONG_MAX;
 
     // if x can be double, change this to a/b
     ll div_floor(ll a, ll b){
@@ -49,14 +49,16 @@ struct CHT{
         return div_floor(db,da);
     }
 
+    public:
     // Inserts f(x) = ax*b in the structure
     void insert(ll a, ll b){
         line l = {a*mult,b*mult};
         
-        auto it = s.lower_bound({l,0});
+        auto it = next(s.insert({l}));
         while(it != s.end() && intersect(l,it->l) >= it->maxx)
             it = s.erase(it);
-        it = s.insert({l,it == s.end() ? inf : intersect(l,it->l)});
+        prev(it)->maxx = it == s.end() ? inf : intersect(l,it->l);
+        it--;
 
         if(it!=s.begin()){
             auto prv = prev(it);

@@ -18,7 +18,7 @@ class UnionFind{
     UnionFind(int n = 0) : v(n,-1){}
 
     int find(int id){
-        return v[id] < 0 ? id : find(v[id]);
+        return v[id] < 0 ? id : v[id] = find(v[id]);
     }
 
     int size(int id){ // Returns size of the component id belongs to
@@ -40,6 +40,8 @@ class UnionFind{
 
         if(size(a) > size(b)) // union by size
             swap(a,b);
+
+        // b will now be the parent of a
 
         v[b] += v[a];
         v[a] = b;

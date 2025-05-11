@@ -14,7 +14,7 @@ do
     ./$3 $testNum > input
     ./$2 < input > outSlow
     ./$1 < input > outWrong
-    if !(cmp -s "outWrong" "outSlow")
+    if !(diff -b "outWrong" "outSlow")
     then
         echo "Error found!"
         echo "Input:"
