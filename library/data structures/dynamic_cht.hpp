@@ -19,7 +19,7 @@ using line = array<ll,2>;
 
 // mult = 1 for maximum, mult = -1 for minimum
 template<ll mult = 1>
-struct CHT{
+class CHT{
     struct poss{
         line l;
         mutable ll maxx;
