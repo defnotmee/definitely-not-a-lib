@@ -1,6 +1,9 @@
+- Add NTT
+- Add Suffix Automaton
+- Make modint interact with cin and cout
+- Rename files to not have acronyms (i.e FastFourierTransform instead of fft)
+- Add CRT
 - Make better documentation for bipartite matching
-- Change trie template to not rely on an internal struct
-- Upgrade lazy segtree template
 - Add HLD usage
 - Add 2SAT usage
 - Add Trie usage

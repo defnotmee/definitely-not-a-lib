@@ -1,20 +1,21 @@
-/*
-from https://github.com/defnotmee/definitely-not-a-lib
-
-Thanks -is-this-fft- for your blog https://codeforces.com/blog/entry/111371
-
-References for implementation: 
-https://cp-algorithms.com/algebra/fft.html
-http://neerc.ifmo.ru/trains/toulouse/2017/fft2.pdf
-https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h
-*/
-
+/**
+ * from https://github.com/defnotmee/definitely-not-a-lib
+ * 
+ * Thanks -is-this-fft- for your blog https://codeforces.com/blog/entry/111371
+ * 
+ * References for implementation: 
+ * 
+ * https://cp-algorithms.com/algebra/fft.html
+ * http://neerc.ifmo.ru/trains/toulouse/2017/fft2.pdf
+ * https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h
+ */
 #ifndef O_O
 #include"../../utility/template.cpp"
 #endif
 
 using cdl = complex<dbll>;
-using cd = complex<double>; // change this to long double if WA and pray
+using cd = complex<double>; // if WA, change this to long double and pray
+
 
 void fft(vector<cd>& v, bool inverse = 0){
     int n = v.size();
@@ -63,9 +64,7 @@ void fft(vector<cd>& v, bool inverse = 0){
 
 
 vector<ll> convolution(vector<ll>& a, vector<ll>& b){
-    int mx = max(a.size(),b.size());
     int n = 1;
-
     while(n+1 < a.size()+b.size())
         n<<=1;
 
@@ -98,10 +97,8 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b){
 }
 
 vector<cd> convolution(vector<cd> a, vector<cd> b){
-    int mx = max(a.size(),b.size());
     int rets = a.size()+b.size()-1;
     int n = 1;
- 
     while(n+1 < a.size()+b.size())
         n<<=1;
     
@@ -122,7 +119,6 @@ vector<cd> convolution(vector<cd> a, vector<cd> b){
 
 template<ull M = MOD>
 vector<ll> convolutionmod(vector<ll>& a, vector<ll>& b){
-    
     const int len = sqrt(M);
     int n = 1;
     while(n+1 < a.size()+b.size())
