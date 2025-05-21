@@ -16,7 +16,7 @@ struct SuffixAutomaton {
         }
     };
 
-    vector<node> sa;
+    vector<state> sa;
     int last = 0;
 
     SuffixAutomaton(){
