@@ -26,7 +26,6 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Persistent Segment Tree
     - [x] Dynamic Convex Hull Trick (CHT)
     - [x] SQRT decomposition
-    - [ ] Li-chao Tree
     - [ ] Sparse Segment Tree
 - [ ] Geometry:
     - [x] Basic Geometry
@@ -50,7 +49,6 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Max Flow (Dinic with Scaling)
     - [x] Maximum Bipartite Matching (Hopcroft-Karp)
     - [x] Functional graph
-    - [ ] Flow with demands
     - [ ] Min Cost Max Flow
     - [ ] Weighted Matching (Hungarian Algorithm)
     - [ ] Block-Cut Tree
@@ -80,14 +78,14 @@ Topics which are already implemented will have their squares filled, topics whic
     - [ ] Big Int
 - [ ] String:
     - [x] Interval Hashing
-    - [x] Prefix Function (KMP)
+    - [x] KMP / KMP-automaton
     - [x] Trie
     - [x] Aho-Corasick
     - [x] Suffix Array
     - [x] Minimum Rotation
+    - [x] Suffix automaton
     - [ ] Z-Function
     - [ ] Manacher's algorithm
-    - [ ] Suffix automaton
 - [ ] DP:
     - [ ] Slope Trick
     - [ ] D&C DP
