@@ -76,6 +76,17 @@ struct modint{
     void operator/=(modint b){
         *this = *this/b;
     }
+
+    friend istream& operator>> (istream& in, modint& v){
+        ll x;
+        cin >> x;
+        v = modint(x);
+        return in;
+    }
+
+    friend ostream& operator<< (ostream& out, modint v){
+        return out << v.x;
+    }
 };
 
 using mint = modint<MOD>;
