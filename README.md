@@ -84,7 +84,7 @@ Topics which are already implemented will have their squares filled, topics whic
     - [x] Suffix Array
     - [x] Minimum Rotation
     - [x] Suffix automaton
-    - [ ] Z-Function
+    - [x] Z-Function
     - [ ] Manacher's algorithm
 - [ ] DP:
     - [ ] Slope Trick
