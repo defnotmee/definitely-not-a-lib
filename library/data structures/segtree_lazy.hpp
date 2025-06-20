@@ -26,8 +26,9 @@ Query: query(l,r), returns seg object equivalent to the sum of all values on ran
 //     int x = 0; // identity value of the merge operation
 // }
 
-template<typename seg = ll>
 struct SegTree{
+    using seg = ll; // <--- comment this if you need a custom struct
+
 
     struct lazy{
         ll mult = 1, add = 0; // "identity value" of lazy tag
