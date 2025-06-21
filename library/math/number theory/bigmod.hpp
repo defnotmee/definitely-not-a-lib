@@ -25,17 +25,18 @@ inline ull modmul(ull a, ull b, ull m){
 }
 
 ull inverse(ull a, ull m){
-    complex<ull> ca{1,0}, cb{0,1};
+    ull x = a, y = m;
+    complex<ull> cx = {1,0}, cy = {0,1};
 
-    while(a){
-        ull curdiv = m/a;
-        m-=a*curdiv;
-        ca-=cb*curdiv;
-        swap(a,m);
-        swap(ca,cb);
+    while(x){
+        ull curdiv = y/x;
+        y-=curdiv*x;
+        cy-=curdiv*cx;
+        swap(cx, cy);
+        swap(x, y);
     }
 
-    return min((ull)cb.real(), -(ull)cb.real());
+    return min(cy.real()+m, cy.real());
 }
 
 ull divmul(ull a, ull b, ull m){
