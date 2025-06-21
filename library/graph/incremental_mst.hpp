@@ -3,11 +3,13 @@
  */
 #ifndef O_O
 #include"../utility/template.cpp"
+#include"../utility/rng.hpp"
 #endif
 
 struct IncrementalMST{
     vector<int> par, sz, prio;
     vector<pii> parw;
+    
 
     IncrementalMST(int n) : par(n), sz(n,1), prio(n), parw(n,{INF,INF}){
         iota(all(prio),0);

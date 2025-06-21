@@ -15,7 +15,7 @@ Depending on the aplication, the dinic.hpp interface may be more convenient.
 struct BiGraph{ // bipartite graph of sizes n and m
 
     int n, m;
-    vector<bstring<int>> g;
+    vector<basic_string<int>> g;
     vector<int> matched, match;
 
     BiGraph(int _n, int _m) : n(_n), m(_m), g(n), matched(n), match(m,-1){}

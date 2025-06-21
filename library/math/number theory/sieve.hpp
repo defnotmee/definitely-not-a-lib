@@ -51,4 +51,4 @@ struct Sieve{
         }
         return ret;
     }
-} sieve(MAXN);
+} sieve(1e6+10);

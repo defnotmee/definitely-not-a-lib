@@ -23,7 +23,7 @@ After adding all edges, call calc_tree().
 struct Tree{
     int n, root;
     vector<int> tin, tout, sub, pai, height;
-    vector<bstring<int>> g;
+    vector<basic_string<int>> g;
     int m = 0;
 
     Tree(int n = 0, int root = 0) : n(n), root(root), 

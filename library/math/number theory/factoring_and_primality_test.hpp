@@ -17,7 +17,7 @@ bool is_prime(ull n){
     if(n <= 1)
         return false;
 
-    ull ctz = countr_zero(n-1);
+    ull ctz = __builtin_ctz(n-1);
     ull d = n>>ctz;
 
     auto primes = {2, 3, 5, 13, 19, 73, 193, 407521, 299210837};

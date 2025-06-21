@@ -11,7 +11,6 @@
  * After calling max_flow, the corresponding flow on edges is recoverable
  * with Edge::flow() and left_of_mincut becomes well defined.
  */
-
 #ifndef O_O
 #include"../utility/template.cpp"
 #endif

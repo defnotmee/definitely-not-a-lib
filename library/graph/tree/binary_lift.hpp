@@ -26,7 +26,7 @@ information about the path, it needs to be commutative (for example, you can sto
 
 struct lift{
     int to = 0;
-    int mn = INF; // Example of path agregate, must be identity value through merge
+    int mn = 1e9; // Example of path agregate, must be identity value through merge
 };
 
 struct BinLift{

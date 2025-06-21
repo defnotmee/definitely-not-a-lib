@@ -31,7 +31,7 @@ you can just process the sccs in **descending** order because of property (III)!
 struct SCC{
 
     int n;
-    vector<bstring<int>> g, r;
+    vector<basic_string<int>> g, r;
 
     vector<int> scc;
     int scc_count = 0;
@@ -61,8 +61,8 @@ struct SCC{
     struct Condensation{
         int n; // number of nodes
         int sn; // number of sccs
-        vector<bstring<int>> g; // Edges going out of the scc
-        vector<bstring<int>> in_scc; // List of vertices in scc[i]
+        vector<basic_string<int>> g; // Edges going out of the scc
+        vector<basic_string<int>> in_scc; // List of vertices in scc[i]
 
         Condensation(int n, int sn) : n(n), sn(sn), g(sn), in_scc(sn){};
     };

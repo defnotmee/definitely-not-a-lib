@@ -13,7 +13,7 @@
 #include"../../utility/template.cpp"
 #endif
 
-using cdl = complex<dbll>;
+using cdl = complex<long double>;
 using cd = complex<double>; // if WA, change this to long double and pray
 
 

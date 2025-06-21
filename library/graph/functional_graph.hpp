@@ -25,7 +25,7 @@ All of this is O(n) preprocessing.
 struct FuncGraph{
     int n;
     vector<int> pai, height, cycleid, cyclepos, is_cycle, tin, tout;
-    vector<bstring<int>> rev, clist;
+    vector<basic_string<int>> rev, clist;
 
     FuncGraph(vector<int> v) : n(v.size()), pai(v), height(n), 
     rev(n), cycleid(n,-1), cyclepos(n), clist(n), is_cycle(n), tin(n), tout(n){

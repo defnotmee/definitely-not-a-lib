@@ -20,7 +20,7 @@ inline ull modsub(ull a, ull b, ull m){
 // stolen from https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/ModMulLL.h
 // works for a,b,m < 7.2e18
 inline ull modmul(ull a, ull b, ull m){
-    ull ret = a*b - m*ull(dbll(a)*b/m);
+    ull ret = a*b - m*ull((long double)(a)*b/m);
     return min({ret,ret+m,ret-m});
 }
 

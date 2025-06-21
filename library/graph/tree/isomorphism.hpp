@@ -24,6 +24,8 @@ be meaningless.
 #include"rooted_tree.hpp"
 #endif
 
+const int SEED = chrono::high_resolution_clock::now().time_since_epoch().count();
+
 struct Rooted_Isomorphism : Tree{
 
     ull seed;
@@ -37,7 +39,7 @@ struct Rooted_Isomorphism : Tree{
         return x^(x>>31)^seed;
     }
 
-    Rooted_Isomorphism(int n = 0, int root = 0, ull seed = RANDOM) : Tree(n,root), seed(seed), hashsub(n) {}
+    Rooted_Isomorphism(int n = 0, int root = 0, ull seed = SEED) : Tree(n,root), seed(seed), hashsub(n) {}
 
     // use this if you want the same graph for a different root, otherwise important info wont be reset
     Rooted_Isomorphism(Rooted_Isomorphism& r, int root) : Rooted_Isomorphism(r.n, root){
