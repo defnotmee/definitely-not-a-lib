@@ -28,14 +28,14 @@ ull inverse(ull a, ull m){
     complex<ull> ca{1,0}, cb{0,1};
 
     while(a){
-       ull curdiv = a/m;
+        ull curdiv = m/a;
+        m-=a*curdiv;
         ca-=cb*curdiv;
-        a-=m*curdiv;
         swap(a,m);
         swap(ca,cb);
     }
 
-    return min(cb.real(), -cb.real());
+    return min((ull)cb.real(), -(ull)cb.real());
 }
 
 ull divmul(ull a, ull b, ull m){
