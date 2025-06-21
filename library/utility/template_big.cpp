@@ -14,15 +14,15 @@ template <typename T>
 using bstring = basic_string<T>;
 template <typename T>
 using matrix = vector<vector<T>>;
+using ll = long long;
+using uint = unsigned int;
+using ull = unsigned long long;
+using dbl = double;
+using dbll = long double;
 using ci = complex<int>;
 using cl = complex<ll>;
-typedef unsigned int uint;
-typedef unsigned long long ull;
-typedef long long ll;
-typedef pair<int,int> pii;
-typedef pair<ll,ll> pll;
-typedef double dbl;
-typedef long double dbll; 
+using pii = pair<int,int>;
+using pll = pair<ll,ll>;
 const ll INFL = 4e18+25;
 const int INF = 1e9+42;
 const double EPS = 1e-7;
