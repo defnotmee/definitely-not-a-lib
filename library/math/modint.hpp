@@ -79,7 +79,7 @@ struct modint{
 
     friend istream& operator>> (istream& in, modint& v){
         ll x;
-        cin >> x;
+        in >> x;
         v = modint(x);
         return in;
     }

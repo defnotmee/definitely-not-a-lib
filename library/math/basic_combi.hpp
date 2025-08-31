@@ -38,4 +38,4 @@ struct Combi{
     }
 };
 
-Combi c;
+Combi<MOD> c;
