@@ -56,7 +56,7 @@ struct IncrementalMST{
             swap(parw[a],w);
         }
         
-        // connect(a);
+        connect(a);
     }
 
     public:

@@ -1,21 +1,36 @@
 /*
 from https://github.com/defnotmee/definitely-not-a-lib
+
+Heavy-Light Decomposition. Does path queries in O(log^2(n)).
+Requires a SegTree.
 */
 
 #ifndef O_O
 #include"../../utility/template.cpp"
-#include"rooted_tree.hpp"
-#include"../../data structures/segtree_lazy.hpp"
+#include"../../data_structures/segtree_lazy.hpp"
 #endif
 
-struct HLD : Tree {
+struct HLD {
     private:
+    int n, root;
+    vector<int> tin, tout, sub, pai, height;
+    vector<basic_string<int>> g;
+    int m = 0;
     SegTree st;
     vector<int> head;
+    using lazy = SegTree::lazy;
+    using seg = SegTree::seg;
 
     public:
+    HLD(int n, int root = 0) : n(n), root(root), g(n),
+    tin(n), tout(n), sub(n,1), pai(n), height(n), 
+    st(n), head(n) {}
 
-    HLD(int n, int root = 0) : Tree(n, root), st(n), head(n) {}
+    void add_edge(int a, int b){
+        g[a].push_back(b);
+        g[b].push_back(a);
+        m++;
+    }
 
     void calc_tree(){
         assert(m == n-1);
@@ -23,9 +38,9 @@ struct HLD : Tree {
         hld(root,root);
     }
 
-    void calc_tree(vector<ll>& v){
+    void calc_tree(vector<seg>& v){
         calc_tree();
-        vector<ll> v2(n);
+        vector<seg> v2(n);
         for(int i = 0; i < n; i++)
             v2[tin[i]] = v[i];
         st = SegTree(v2);
@@ -45,9 +60,6 @@ struct HLD : Tree {
     int dist(int a, int b){
         return height[a] + height[b] - 2*height[lca(a,b)];
     }
-
-    using lazy = SegTree::lazy;
-    using seg = SegTree::seg;
 
     void update_point(int id, SegTree::lazy upd){
         st.update(tin[id], tin[id], upd);
@@ -102,20 +114,17 @@ struct HLD : Tree {
     private:
     
     void prec(int id){
-        // tout[id] = tin[id];
-        if(g[id].size() && g[id][0] == pai[id]) // not on rooted_tree.hpp
-            swap(g[id][0], g[id].back());// not on rooted_tree.hpp
-        for(int& v : g[id]){ // & not in rooted_tree.hpp
+        if(g[id].size() && g[id][0] == pai[id])
+            swap(g[id][0], g[id].back());
+        for(int& v : g[id]){
             if(v == pai[id])
                 continue;
             pai[v] = id;
             height[v] = height[id]+1;
-            // tin[v] = tout[id]+1;
             prec(v);
-            // tout[id] = tout[v];
             sub[id]+=sub[v];
-            if(sub[v] > sub[g[id][0]]) // not on rooted_tree.hpp
-                swap(v,g[id][0]); // not on rooted_tree.hpp
+            if(sub[v] > sub[g[id][0]])
+                swap(v,g[id][0]);
         }
     }
 

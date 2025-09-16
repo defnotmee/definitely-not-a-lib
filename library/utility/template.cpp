@@ -15,6 +15,7 @@ using pii = pair<int,int>;
 using ull = unsigned long long;
 const int MOD = 998244353;
 const int INF = 1e9+42;
+const ll INFL = 2e18;
 const int MAXN = 1e6+10;
 
 int main(){

@@ -1,5 +1,4 @@
 - Add NTT
-- Make modint interact with cin and cout
 - Rename files to not have acronyms (i.e FastFourierTransform instead of fft)
 - Add CRT
 - Make better documentation for bipartite matching

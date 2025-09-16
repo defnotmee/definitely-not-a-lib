@@ -3,7 +3,7 @@ from https://github.com/defnotmee/definitely-not-a-lib
 
 Maintains a partially ordered set (or pareto front), that is,
 a list of pairs (x[i], y[i]) such that if for i < j:
-x[i] < x[j], then y[i] < y[j].
+x[i] < x[j] => y[i] < y[j].
 
 In a practical sense, "increasing x is bad but incresing y
 is good". You can edit pareto::item::fix to change that.
@@ -32,7 +32,6 @@ struct pareto{
 
             // In case increasing y is bad, uncomment this:
             // y*=-1;
-            
         }
     };
 
@@ -58,7 +57,7 @@ struct pareto{
         s.insert(cur);
     }
 
-    // returns last item with x <= max_x
+    // returns best item with x <= max_x,
     item bsearch(ll max_x){
         item cur = {max_x,0};
         cur.fix();
@@ -66,7 +65,8 @@ struct pareto{
         cur.y = -INFL;
         auto it = s.lower_bound(cur);
         if(it == s.begin()){
-            item ret = {INFL,-INFL};
+            // pretends that there is a really bad item that always exists
+            item ret = {INFL,-INFL}; 
             ret.fix();
             return ret;
         }

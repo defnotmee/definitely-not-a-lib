@@ -29,12 +29,6 @@ struct Tree{
     Tree(int n = 0, int root = 0) : n(n), root(root), 
     tin(n), tout(n), sub(n,1), pai(n,root), height(n), g(n){}
 
-    // Takes a tree, changes the root and preprocesses it
-    Tree(Tree& t, int root) : Tree(t.n, root){
-        g = t.g;
-        calc_tree();
-    }
-
     void add_edge(int a, int b){
         g[a].push_back(b);
         g[b].push_back(a);

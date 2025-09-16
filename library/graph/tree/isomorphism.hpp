@@ -21,13 +21,16 @@ be meaningless.
 
 #ifndef O_O
 #include"../../utility/template.cpp"
-#include"rooted_tree.hpp"
 #endif
 
 const int SEED = chrono::high_resolution_clock::now().time_since_epoch().count();
 
-struct Rooted_Isomorphism : Tree{
-
+struct Rooted_Isomorphism{
+    
+    int n, root;
+    vector<int> tin, tout, sub, pai, height;
+    vector<basic_string<int>> g;
+    int m = 0;
     ull seed;
     vector<ll> hashsub;
 
@@ -39,12 +42,20 @@ struct Rooted_Isomorphism : Tree{
         return x^(x>>31)^seed;
     }
 
-    Rooted_Isomorphism(int n = 0, int root = 0, ull seed = SEED) : Tree(n,root), seed(seed), hashsub(n) {}
+    Rooted_Isomorphism(int n = 0, int root = 0, ull seed = SEED) : n(n), root(root), 
+    tin(n), tout(n), sub(n,1), pai(n,root), height(n), g(n),
+    seed(seed), hashsub(n) {}
 
     // use this if you want the same graph for a different root, otherwise important info wont be reset
     Rooted_Isomorphism(Rooted_Isomorphism& r, int root) : Rooted_Isomorphism(r.n, root){
         m = r.m;
         g = r.g;
+    }
+
+    void add_edge(int a, int b){
+        g[a].push_back(b);
+        g[b].push_back(a);
+        m++;
     }
 
     // returns hash of the whole tree
@@ -67,9 +78,9 @@ struct Rooted_Isomorphism : Tree{
             prec(v);
             tout[id] = tout[v];
             sub[id]+=sub[v];
-            hashsub[id]+=hashsub[v]; // not on rooted_tree.hpp
+            hashsub[id]+=hashsub[v];
         }
-        hashsub[id] = hasher(hashsub[id]); // not on rooted_tree.hpp
+        hashsub[id] = hasher(hashsub[id]);
     }
 
 };
@@ -83,9 +94,27 @@ struct Unrooted_Isomorphism{
         tree.add_edge(a,b);
     }
 
+    pii find_centroids(){
+        int id = tree.root;
+
+        while(true){
+            for(int v : tree.g[id]){
+                if(tree.pai[id] != v && tree.sub[v]*2 >= tree.n){
+                    id = v;
+                    goto NEXT;
+                }
+            }
+            break;
+            NEXT:;
+        }
+        if(tree.sub[id]*2 == tree.n)
+            return {tree.pai[id], id};
+        return {id,id};
+    }
+
     ull calc_tree(){
         tree.calc_tree();
-        auto [c1, c2] = tree.find_centroids();
+        auto [c1, c2] = find_centroids();
         
         tree = Rooted_Isomorphism(tree,c1);
         ull tmp = tree.calc_tree();

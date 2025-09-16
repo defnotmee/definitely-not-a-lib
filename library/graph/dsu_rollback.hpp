@@ -19,8 +19,8 @@ struct DSU_Rollback{
     
     DSU_Rollback(int n = 0) : v(n,-1), comp_ct(n){}
 
-    constexpr int size(int id){ // Only call when id is the root of a group. Use size(find(id)) otherwise.
-        return -v[id];
+    constexpr int size(int id){ // returns size of the component id belongs to
+        return -v[find(id)];
     }
 
     constexpr int pai(int id){ // Returns parent of id

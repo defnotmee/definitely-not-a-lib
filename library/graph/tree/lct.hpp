@@ -4,13 +4,13 @@
  * Implementation from https://codeforces.com/blog/entry/75885
  * Will implement it myself eventually but will just put it here
  * until I do.
+ * 
+ * Different from other algos on this library, it is 1-INDEXED!!!
 */
 
 #ifndef O_O
 #include"../utility/template.cpp"
 #endif
-
-
 
 struct SplayTree {
     struct Node {
@@ -114,6 +114,6 @@ struct SplayTree {
     
     // Update vertex u with value v
     void Update(int u, ll v) {
-      access(u); T[u].self = v; pull(u);
+      access(u); T[u].self += v; pull(u);
     }
 };

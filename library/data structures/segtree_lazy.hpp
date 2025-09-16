@@ -21,12 +21,11 @@ Query: query(l,r), returns seg object equivalent to the sum of all values on ran
 #include"../utility/template.cpp"
 #endif
 
-// Uncomment if you need a custom struct
-// struct seg{
-//     int x = 0; // identity value of the merge operation
-// }
-
 struct SegTree{
+    // Uncomment if you need a custom struct
+    // struct seg{
+    //     int x = 0; // identity value of the merge operation
+    // }
     using seg = ll; // <--- comment this if you need a custom struct
 
 

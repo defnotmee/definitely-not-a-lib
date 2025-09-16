@@ -89,7 +89,7 @@ struct PSegTree{
     ll l, r;
     Node<seg>* head;
 
-    PSegTree(ll l, ll r) : l(l), r(r), head(new Node<seg>()){}
+    PSegTree(ll l = 0, ll r = 0) : l(l), r(r), head(new Node<seg>()){}
 
     seg query(ll ql, ll qr){
         return head->query(l,r,ql,qr);
